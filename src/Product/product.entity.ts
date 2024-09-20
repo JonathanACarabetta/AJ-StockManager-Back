@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Category } from "src/Category/category.entity";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({
     name: "Product"
@@ -11,8 +12,8 @@ export class Product {
     @Column()
     name: string;
 
-    @Column()
-    categories: String;
+    @ManyToMany(()=>Category, (category)=>category.products)
+    categories: Category[];
 
     @Column()
     cost: number;
