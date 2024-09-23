@@ -14,6 +14,10 @@ export class CategoryService {
         return this.categoryRepository.findOneById(id);
     }
 
+    getCategoriesByIds(ids:number[]):Promise<Category[]>{
+        return this.categoryRepository.getCategoriesByIds(ids);
+    }
+
     createCategory(category:Partial<Category>):Promise<Category>{
         return this.categoryRepository.createCategory(category);
     }
