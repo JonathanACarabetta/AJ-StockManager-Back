@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Post, Body, Put, Delete } from "@nestjs/common";
 import { ClientService } from "./client.service";
 import { Client } from "./client.entity";
+import { createClientDTO } from "./dto/createClientDto";
 
 @Controller("clients")
 export class ClientController{
@@ -17,13 +18,13 @@ export class ClientController{
     }
 
     @Post("/create")
-    createClient(@Body()client: Partial<Client>):Promise<Client>{
-        return this.clientService.createClient(client);
+    createClient(@Body()clientDTO: createClientDTO):Promise<Client>{
+        return this.clientService.createClient(clientDTO);
     }
 
     @Put("/update/:id")
-    updateClient(@Body()client: Partial<Client>, @Param("id") id : number):Promise<Client>{
-        return this.clientService.updateClient(id,client);
+    updateClient(@Body()clientDTO: createClientDTO, @Param("id") id : number):Promise<Client>{
+        return this.clientService.updateClient(id,clientDTO);
     }
 
     @Delete("/delete/:id")
