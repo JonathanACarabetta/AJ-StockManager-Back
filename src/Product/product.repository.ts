@@ -43,7 +43,8 @@ export class ProductRepository{
                 price: productDTO.price,
                 stock: productDTO.stock,
                 bar_code: productDTO.bar_code,
-                brand: productDTO.brand
+                brand: productDTO.brand,
+                provider_name: productDTO.provider_name
             };
             if(productDTO.categories.length > 0){
                 const categories = await this.categoryService.getCategoriesByIds(productDTO.categories)
@@ -64,7 +65,8 @@ export class ProductRepository{
                 price: productDTO.price,
                 stock: productDTO.stock,
                 bar_code: productDTO.bar_code,
-                brand: productDTO.brand
+                brand: productDTO.brand,
+                provider_name: productDTO.provider_name
             };
             if(productDTO.categories.length > 0){
                 const categories = await this.categoryService.getCategoriesByIds(productDTO.categories)
