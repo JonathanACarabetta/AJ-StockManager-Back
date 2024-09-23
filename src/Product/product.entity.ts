@@ -31,4 +31,7 @@ export class Product {
 
     @Column()
     brand: string;
+
+    @Column()
+    provider_name: string;
 }

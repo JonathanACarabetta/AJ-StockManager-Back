@@ -27,4 +27,8 @@ export class CreateProductDTO{
 
     @IsArray()
     categories: number[];
+
+    @IsNotEmpty()
+    @IsString()
+    provider_name: string;
 }

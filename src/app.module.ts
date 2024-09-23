@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeOrmConfig from "./config/database";
 import { CategoryModule } from './Category/Category.module';
+import {ClientModule} from "./Client/client.module";
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CategoryModule } from './Category/Category.module';
   }),
   ProductModule,
   CategoryModule,
+  ClientModule,
 ],
   providers: [],
 })
