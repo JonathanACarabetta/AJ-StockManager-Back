@@ -8,19 +8,19 @@ export class Client {
     @Column()
     name: string;
 
-    @Column()
+    @Column({nullable:true})
     phone_number: string;
 
-    @Column()
+    @Column({nullable:true})
     address: string;
 
     @Column({unique: true})
     email: string;
 
-    @Column({unique: true})
+    @Column({unique: true, nullable:true, type:"bigint"})
     cuit: number;
 
-    @Column({unique: true})
+    @Column({unique: true, nullable:true})
     fiscal_key: string;
 
     @Column()

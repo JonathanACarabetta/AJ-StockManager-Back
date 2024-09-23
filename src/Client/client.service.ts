@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { ClientRepository } from "./client.repository";
 import { Client } from "./client.entity";
+import { createClientDTO } from "./dto/createClientDto";
 
 @Injectable()
 export class ClientService{
@@ -14,12 +15,12 @@ export class ClientService{
         return this.clientRepository.getClientById(id);
     }
 
-    createClient(client: Partial<Client>):Promise<Client>{
-        return this.clientRepository.createClient(client);
+    createClient(clientDTO: createClientDTO):Promise<Client>{
+        return this.clientRepository.createClient(clientDTO);
     }
 
-    updateClient(id:number, client: Partial<Client>):Promise<Client>{
-        return this.clientRepository.updateClient(id, client);
+    updateClient(id:number, clientDTO: createClientDTO):Promise<Client>{
+        return this.clientRepository.updateClient(id, clientDTO);
     }
 
     deleteClient(id:number):Promise<string>{

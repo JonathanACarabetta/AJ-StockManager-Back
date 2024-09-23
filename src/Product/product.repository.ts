@@ -3,7 +3,7 @@ import { Repository } from "typeorm";
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Product } from "./product.entity";
 import { CategoryService } from "../Category/category.service";
-import { CreateProductDTO } from "./DTOs/createProductDTO";
+import { CreateProductDTO } from "./dto/createProductDTO";
 
 @Injectable()
 export class ProductRepository{
