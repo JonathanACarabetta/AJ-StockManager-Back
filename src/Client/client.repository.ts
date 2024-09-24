@@ -69,7 +69,7 @@ export class ClientRepository {
             client.isDeleted=true;
             const deletedClient = await this.clientReposiroty.update(id,client);
             if(deletedClient.affected === 0) throw new NotFoundException('Cliente no encontrado');
-            return 'Cliente eliminado exitosamente';
+            return `Cliente con id ${id} eliminado exitosamente`;
         } catch (error) {
             throw new NotFoundException(`Error al eliminar el cliente con id ${id}: ${error.message}`);
         }
