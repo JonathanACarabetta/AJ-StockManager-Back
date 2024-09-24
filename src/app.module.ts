@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeOrmConfig from "./config/database";
 import { CategoryModule } from './Category/Category.module';
 import {ClientModule} from "./Client/client.module";
+import { SellModule } from "./Sell/sell.module";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import {ClientModule} from "./Client/client.module";
   ProductModule,
   CategoryModule,
   ClientModule,
+  SellModule,
 ],
   providers: [],
 })

@@ -88,7 +88,7 @@ export class ProductRepository{
             if(result.affected === 0){
                 throw new NotFoundException(`El producto con id ${id} no existe`);
             }
-            return "Producto eliminado exitosamente";
+            return `Producto con id ${id} eliminado exitosamente`;
         } catch (error) {
             throw new NotFoundException(`Error al eliminar el producto con id ${id}`);
         }

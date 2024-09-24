@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Sell } from "src/Sell/sell.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: "client"})
 export class Client {
@@ -25,4 +26,7 @@ export class Client {
 
     @Column()
     isDeleted: boolean;
+
+    @OneToMany(()=>Sell,(sell)=>sell.client)
+    sells: Sell[];
 }

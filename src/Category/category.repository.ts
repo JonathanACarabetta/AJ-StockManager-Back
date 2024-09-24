@@ -67,7 +67,7 @@ export class CategoryRepository {
             if (deletedCategory.affected === 0) {
                 throw new NotFoundException(`La Categoria con id ${id} no existe`);
             }
-            return "Categoría eliminada exitosamente";
+            return `Categoría con id ${id} eliminada exitosamente`;
         } catch (error) {
             throw new NotFoundException(`Error al eliminar la Categoria con id ${id}`);
         }
