@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { SellRepository } from "./sell.repository";
 import { Sell } from "./sell.entity";
+import { createSellDTO } from "./dto/createSellDTO";
 
 @Injectable()
 export class SellService{
@@ -14,11 +15,11 @@ export class SellService{
         return this.sellRepository.getSellById(id);
     }
 
-    createSell(sellDTO: Partial<Sell>):Promise<Sell>{
+    createSell(sellDTO: createSellDTO):Promise<Sell>{
         return this.sellRepository.createSell(sellDTO);
     }
     
-    updateSell(sellDTO: Partial<Sell>, id:number):Promise<Sell>{
+    updateSell(sellDTO: createSellDTO, id:number):Promise<Sell>{
         return this.sellRepository.updateSell(id,sellDTO);
     }
 
