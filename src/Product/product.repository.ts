@@ -1,5 +1,5 @@
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { Repository, In} from "typeorm";
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Product } from "./product.entity";
 import { CategoryService } from "../Category/category.service";
@@ -35,6 +35,14 @@ export class ProductRepository{
         }
     }
 
+    async getProductsByIds(ids:number[]): Promise<Product[]>{
+        try{
+            return await this.productRepository.findBy({id:In(ids)});
+        }catch(error){
+            throw new NotFoundException(`Error al obtener los productos`)
+        }
+    }
+
     async createProduct(productDTO: CreateProductDTO): Promise<Product>{
         try {
             const product: Partial<Product> = {
@@ -53,31 +61,32 @@ export class ProductRepository{
             const createdProduct = await this.productRepository.save(product);
             return createdProduct;
         } catch (error) {
+            console.log(error);
+            
             throw new NotFoundException("Error al crear el producto");
         }
     }
 
     async updateProduct(id: number, productDTO: CreateProductDTO): Promise<Product>{
         try {
-            const product: Partial<Product> = {
-                name:productDTO.name,
-                cost: productDTO.cost,
-                price: productDTO.price,
-                stock: productDTO.stock,
-                bar_code: productDTO.bar_code,
-                brand: productDTO.brand,
-                provider_name: productDTO.provider_name
-            };
+            const product = await this.getProductById(id);
+            product.name=productDTO.name;
+            product.cost= productDTO.cost;
+            product.price= productDTO.price;
+            product.stock= productDTO.stock;
+            product.bar_code= productDTO.bar_code;
+            product.brand= productDTO.brand;
+            product.provider_name= productDTO.provider_name;
+            
             if(productDTO.categories.length > 0){
                 const categories = await this.categoryService.getCategoriesByIds(productDTO.categories)
                 product.categories = categories;
             }
-            const updatedProduct = await this.productRepository.update(id, product);
-            if(updatedProduct.affected === 0){
-                throw new NotFoundException(`El producto con id ${id} no existe`);
-            }
-            return await this.getProductById(id);
+            await this.productRepository.save(product);
+            return product;
         } catch (error) {
+            console.log(error);
+            
             throw new NotFoundException(`Error al actualizar el producto con id ${id}`);
         }
     }

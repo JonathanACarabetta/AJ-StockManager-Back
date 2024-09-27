@@ -15,6 +15,10 @@ export class ProductService {
         return this.productRepository.getProductById(id);
     }
 
+    getProductsByIds(ids:number[]):Promise<Product[]>{
+        return this.productRepository.getProductsByIds(ids);
+    }
+
     createProduct(productDTO: CreateProductDTO){
         return this.productRepository.createProduct(productDTO);
     }
