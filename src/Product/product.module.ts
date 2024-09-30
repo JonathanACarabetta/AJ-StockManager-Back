@@ -5,7 +5,7 @@ import { ProductService } from "./product.service";
 import { ProductRepository } from "./product.repository";
 import { ProductController } from "./product.controller";
 import { Category } from "../Category/category.entity";
-import { CategoryModule } from "../Category/Category.module";
+import { CategoryModule } from "../Category/category.module";
 import { CategoryService } from "../Category/category.service";
 import { CategoryRepository } from "../Category/category.repository";
 @Module({
