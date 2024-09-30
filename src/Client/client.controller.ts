@@ -1,7 +1,7 @@
 import { Controller, Get, Param, Post, Body, Put, Delete } from "@nestjs/common";
 import { ClientService } from "./client.service";
 import { Client } from "./client.entity";
-import { createClientDTO } from "./dto/createClientDto";
+import { createClientDTO } from "./dto/createClientDTO";
 
 @Controller("clients")
 export class ClientController{
