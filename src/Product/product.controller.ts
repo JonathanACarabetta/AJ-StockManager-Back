@@ -3,7 +3,7 @@ import { ProductService } from "./product.service";
 import { Product } from "./product.entity";
 import { CreateProductDTO } from "./dto/createProductDTO";
 import { EditPriceCost } from "./dto/editPriceCost";
-import { updateProductPriceAndCostInterceptor } from "src/Interceptors/updateProductPriceAndCost.interceptor";
+import { updateProductPriceAndCostInterceptor } from "../Interceptors/updateProductPriceAndCost.interceptor";
 
 
 @Controller("product")
