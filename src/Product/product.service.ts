@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ProductRepository } from "./product.repository";
 import { Product } from "./product.entity";
 import { CreateProductDTO } from "./dto/createProductDTO";
+import { EditPriceCost } from "./dto/editPriceCost";
 
 @Injectable()
 export class ProductService {
@@ -25,6 +26,10 @@ export class ProductService {
 
     updateProduct(id: number, productDTO: CreateProductDTO): Promise<Product>{
         return this.productRepository.updateProduct(id, productDTO);
+    }
+
+    updatePriceAndCost(products: EditPriceCost[]): Promise<String>{
+        return this.productRepository.updatePriceAndCost(products);
     }
 
     deleteProduct(id:number): Promise<String>{

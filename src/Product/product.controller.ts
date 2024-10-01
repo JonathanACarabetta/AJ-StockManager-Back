@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from "@nestjs/common";
 import { ProductService } from "./product.service";
 import { Product } from "./product.entity";
 import { CreateProductDTO } from "./dto/createProductDTO";
+import { EditPriceCost } from "./dto/editPriceCost";
+import { updateProductPriceAndCostInterceptor } from "src/Interceptors/updateProductPriceAndCost.interceptor";
 
 
 @Controller("product")
@@ -23,10 +25,17 @@ export class ProductController{
         return this.productService.createProduct(productDTO);
     }
 
+    @Put("/update/cost_and_price")
+    @UseInterceptors(updateProductPriceAndCostInterceptor)
+    updatePriceAndCost(@Body()filteredProducts:EditPriceCost[]):Promise<String>{
+        return this.productService.updatePriceAndCost(filteredProducts);
+    }
+
     @Put("/update/:id")
     updateProduct(@Body() productDTO: CreateProductDTO,@Param("id") id:number):Promise<Product>{
         return this.productService.updateProduct(id, productDTO);
     }
+
 
     @Delete("/delete/:id")
     deleteProduct(@Param("id") id:number):Promise<String>{
