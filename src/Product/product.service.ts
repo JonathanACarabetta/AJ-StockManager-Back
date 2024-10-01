@@ -12,6 +12,10 @@ export class ProductService {
         return this.productRepository.getAllProducts();
     }
 
+    getProductsByProvider(provider:string):Promise<Product[]>{
+        return this.productRepository.getProductsByProvider(provider);
+    }
+
     getProductById(id:number):Promise<Product>{
         return this.productRepository.getProductById(id);
     }
