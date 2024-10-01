@@ -4,6 +4,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { Product } from "./product.entity";
 import { CategoryService } from "../Category/category.service";
 import { CreateProductDTO } from "./dto/createProductDTO";
+import { EditPriceCost } from "./dto/editPriceCost";
 
 @Injectable()
 export class ProductRepository{
@@ -88,6 +89,26 @@ export class ProductRepository{
             console.log(error);
             
             throw new NotFoundException(`Error al actualizar el producto con id ${id}`);
+        }
+    }
+
+    async updatePriceAndCost(products: EditPriceCost[]): Promise<String>{
+        try {
+            products.forEach(async product=>{
+                try {
+                    const productToUpdate = await this.getProductById(product.id);
+                    if (product.price != null) productToUpdate.price = product.price;
+                    if (product.cost != null)productToUpdate.cost = product.cost;
+                    await this.productRepository.save(productToUpdate);
+                } catch (error) {
+                    console.log(error);
+                    
+                }
+            });
+            return `Precios y/o Costos Actualizados`;
+        } catch (error) {
+            console.log(error);
+            throw new NotFoundException("Error al actualizar precios y costos de productos");
         }
     }
 
