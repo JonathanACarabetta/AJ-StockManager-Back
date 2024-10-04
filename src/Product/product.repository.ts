@@ -37,7 +37,15 @@ export class ProductRepository {
             return productsByProviderName;
         } catch (error) {
             console.log(error);
-            
+        }
+    }
+
+    async getProductsByCategory(category: string): Promise<Product[]> {
+        try {
+            const categoryByName = await this.categoryService.getCategoryByName(category);
+            return categoryByName.products;
+        } catch (error) {
+            throw new NotFoundException("Error al traer Categoria o nombre no existe");
         }
     }
 
