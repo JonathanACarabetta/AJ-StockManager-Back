@@ -15,9 +15,14 @@ export class ProductController{
         return this.productService.getProducts();
     }
 
-    @Get("/filter/:provider")
+    @Get("/filter_by_provider/:provider")
     getProductsByProvider(@Param("provider") provider: string):Promise<Product[]>{
         return this.productService.getProductsByProvider(provider);
+    }
+
+    @Get("/filter_by_category/:category")
+    getProductsByCategory(@Param("category") category: string):Promise<Product[]>{
+        return this.productService.getProductsByCategory(category);
     }
 
     @Get("/:id")
