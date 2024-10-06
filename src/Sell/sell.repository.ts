@@ -7,16 +7,17 @@ import { ProductService } from "../Product/product.service"
 import { log } from "console";
 import { ClientService } from "../Client/client.service";
 import { UpdateSellDTO } from "./dto/updateSellDTO";
+import { Sell_DetailsService } from "src/Sell_Details/sell_details.service";
 
 @Injectable()
 export class SellRepository {
     constructor(@InjectRepository(Sell) private sellRepository: Repository<Sell>,
-        private readonly productService: ProductService,
+        private readonly sell_detailsService: Sell_DetailsService,
         private readonly clientService: ClientService) { }
 
     async getAllSells(): Promise<Sell[]> {
         try {
-            return await this.sellRepository.find();
+            return await this.sellRepository.find({relations: ["client", "details"]});
         } catch (error) {
             throw new NotFoundException("Error al traer las ventas");
         }
@@ -24,7 +25,7 @@ export class SellRepository {
 
     async getSellById(id: number): Promise<Sell> {
         try {
-            const sell = await this.sellRepository.findOne({ where: { id: id }, relations: ["client", "products"] });
+            const sell = await this.sellRepository.findOne({ where: { id: id }, relations: ["client", "details"] });
             if (!sell) throw new NotFoundException(`La venta con id ${id} no existe`);
             return sell;
         } catch (error) {
@@ -34,40 +35,37 @@ export class SellRepository {
 
     async createSell(sellDto: createSellDTO): Promise<Sell> {
         try {
-            const sell: Partial<Sell> = {
-                pay_method: sellDto.pay_method,
-                bill_type: sellDto.bill_type
-            }
+            const sell: Sell = new Sell();
+            sell.bill_type = sellDto.bill_type;
+            sell.pay_method = sellDto.pay_method;
             sell.client = await this.clientService.getClientById(sellDto.client_id);
-            sell.products = await this.productService.getProductsByIds(sellDto.products);
-            let aux: number = 0;
-            sell.products.forEach((product) => {
-                aux = product.price + aux;
+            sell.details = await this.sell_detailsService.createSell_details(sellDto.products);
+            let aux = 0;
+            sell.details.forEach((detail)=>{
+                aux = detail.total + aux;
             })
             sell.total = aux;
             return await this.sellRepository.save(sell);
         } catch (error) {
-            throw new NotFoundException("Error al crear la venta");
+            throw new NotFoundException(error.message);
         }
     }
 
     async updateSell(id: number, sellDto: createSellDTO): Promise<Sell> {
         try {
-            const sell = await this.getSellById(id);
-            sell.pay_method = sellDto.pay_method;
+            const sell: Sell = new Sell();
             sell.bill_type = sellDto.bill_type;
+            sell.pay_method = sellDto.pay_method;
             sell.client = await this.clientService.getClientById(sellDto.client_id);
-            sell.products = await this.productService.getProductsByIds(sellDto.products);
-            let aux: number = 0;
-            sell.products.forEach((product) => {
-                aux = product.price + aux;
+            sell.details = await this.sell_detailsService.createSell_details(sellDto.products);
+            let aux = 0;
+            sell.details.forEach((detail)=>{
+                aux = detail.total + aux;
             })
             sell.total = aux;
-            await this.sellRepository.save(sell);
-            return sell;
+            return await this.sellRepository.save(sell);
         } catch (error) {
-            console.log(error);
-            throw new NotFoundException(`Error al actualizar la venta con id ${id}`);
+            throw new NotFoundException(error.message);
         }
     }
 

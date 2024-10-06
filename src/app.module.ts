@@ -6,6 +6,7 @@ import typeOrmConfig from "./config/database";
 import { CategoryModule } from './Category/category.module';
 import {ClientModule} from "./Client/client.module";
 import { SellModule } from "./Sell/sell.module";
+import { Sell_DetailsModule } from './Sell_Details/sell_details.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { SellModule } from "./Sell/sell.module";
   CategoryModule,
   ClientModule,
   SellModule,
+  Sell_DetailsModule
 ],
   providers: [],
 })

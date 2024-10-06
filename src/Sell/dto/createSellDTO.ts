@@ -15,6 +15,14 @@ export class createSellDTO{
 
     @IsNotEmpty()
     @IsArray()
-    products: number[];
+    products: ProductsInSell[];
 
+}
+
+export class ProductsInSell {
+    @IsNumber()
+    productId: number;
+
+    @IsNumber()
+    quantity: number;
 }

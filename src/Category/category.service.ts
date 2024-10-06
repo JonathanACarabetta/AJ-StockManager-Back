@@ -18,6 +18,10 @@ export class CategoryService {
         return this.categoryRepository.getCategoriesByIds(ids);
     }
 
+    getCategoryByName(category:string):Promise<Category>{
+        return this.categoryRepository.getCategoryByName(category);
+    }
+
     createCategory(category:Partial<Category>):Promise<Category>{
         return this.categoryRepository.createCategory(category);
     }

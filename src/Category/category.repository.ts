@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Category } from "./category.entity";
-import { In, Repository } from "typeorm";
+import { In, Repository, Raw } from "typeorm";
 
 @Injectable()
 export class CategoryRepository {
@@ -37,9 +37,22 @@ export class CategoryRepository {
         }
     }
 
+    async getCategoryByName(categoryName:string):Promise<Category>{
+        try{
+            const upperSearch = categoryName.toUpperCase();
+            return await this.categoryRepository.findOne({where: {
+                name: Raw((alias) => `UPPER(${alias}) LIKE UPPER(:search)`, {
+                    search: `%${upperSearch}%`}),
+            },relations:["products"]})
+        }catch (error) {
+            throw new NotFoundException("Error al traer categoria");
+        }
+    }
+
     async createCategory(category: Partial<Category>): Promise<Category> {
         try {
             category.isDeleted = false;
+            category.name = category.name.toUpperCase();
             const createdCategory = await this.categoryRepository.save(category);
             return createdCategory;
         } catch (error) {
