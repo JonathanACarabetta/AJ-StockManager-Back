@@ -5,6 +5,7 @@ import { Product } from "./product.entity";
 import { CategoryService } from "../Category/category.service";
 import { CreateProductDTO } from "./dto/createProductDTO";
 import { EditPriceCost } from "./dto/editPriceCost";
+import { ProductsInSell } from "src/Sell/dto/createSellDTO";
 
 @Injectable()
 export class ProductRepository {
@@ -66,6 +67,16 @@ export class ProductRepository {
             return await this.productRepository.findBy({ id: In(ids) });
         } catch (error) {
             throw new NotFoundException(`Error al obtener los productos`)
+        }
+    }
+
+    async updateStock(productToUpdate: ProductsInSell): Promise<Product> {
+        try {
+            const product = await this.productRepository.findOneBy({ id: productToUpdate.productId });
+            product.stock = product.stock - productToUpdate.quantity;
+            return await this.productRepository.save(product);;
+        } catch (error) {
+            throw new NotFoundException(`Error al actualizar los productos`)
         }
     }
 
