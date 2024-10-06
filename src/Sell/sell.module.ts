@@ -13,10 +13,13 @@ import { Category } from "../Category/category.entity";
 import { Client } from "../Client/client.entity"
 import { ClientService } from "../Client/client.service";
 import { ClientRepository } from "../Client/client.repository";
+import { Sell_Details } from "src/Sell_Details/sell_details.entity";
+import { Sell_DetailsService } from "src/Sell_Details/sell_details.service";
+import { Sell_DetailsRepository } from "src/Sell_Details/sell_details.repository";
 
 @Module({
-    imports:[TypeOrmModule.forFeature([Sell,Product,Category,Client])],
-    providers:[SellRepository, SellService, ProductService, ProductRepository, CategoryService, CategoryRepository, ClientRepository, ClientService],
+    imports:[TypeOrmModule.forFeature([Sell,Product,Category,Client,Sell_Details])],
+    providers:[SellRepository, SellService, ProductService, ProductRepository, CategoryService, CategoryRepository, ClientRepository, ClientService,Sell_DetailsService,Sell_DetailsRepository],
     controllers:[SellController]
 })
 export class SellModule{};

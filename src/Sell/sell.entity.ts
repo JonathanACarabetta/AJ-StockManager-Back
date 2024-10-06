@@ -1,6 +1,7 @@
 import { Client } from "src/Client/client.entity";
 import { Product } from "src/Product/product.entity";
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Sell_Details } from "src/Sell_Details/sell_details.entity";
+import { CreateDateColumn, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: "sell"})
 export class Sell {
@@ -10,37 +11,15 @@ export class Sell {
     @Column()
     pay_method: string;
 
-    @Column()
+    @Column({ default: 0, type: "float" })
     total: number;
 
     @Column()
     bill_type: string;
 
-    @ManyToMany(()=>Product,(product)=>product.sells)
-    @JoinTable({
-        name: "sell_product",
-        joinColumns: [{
-            name: "sell_id",
-            referencedColumnName: "id"
-        }],
-        inverseJoinColumns: [{
-            name: "product_id",
-            referencedColumnName: "id"
-        }]
-    })
-    products: Product[];
-
     @ManyToOne(()=>Client, (client)=> client.sells)
-    @JoinTable({
-        name: "sell_client",
-        joinColumns: [{
-            name: "sell_id",
-            referencedColumnName: "id"
-        }],
-        inverseJoinColumns: [{
-            name: "client_id",
-            referencedColumnName: "id"
-        }]
-    })
     client: Client;
+
+    @OneToMany(() => Sell_Details, (details) => details.sell)
+    details: Sell_Details[];
 }

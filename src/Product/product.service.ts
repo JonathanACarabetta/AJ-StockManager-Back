@@ -3,6 +3,7 @@ import { ProductRepository } from "./product.repository";
 import { Product } from "./product.entity";
 import { CreateProductDTO } from "./dto/createProductDTO";
 import { EditPriceCost } from "./dto/editPriceCost";
+import { ProductsInSell } from "src/Sell/dto/createSellDTO";
 
 @Injectable()
 export class ProductService {
@@ -26,6 +27,10 @@ export class ProductService {
 
     getProductsByIds(ids:number[]):Promise<Product[]>{
         return this.productRepository.getProductsByIds(ids);
+    }
+
+    updateStock(productToUpdate:ProductsInSell):Promise<Product>{
+        return this.productRepository.updateStock(productToUpdate);
     }
 
     createProduct(productDTO: CreateProductDTO){
