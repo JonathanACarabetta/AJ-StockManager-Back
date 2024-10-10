@@ -1,7 +1,6 @@
-import { Client } from "src/models/client.entity";
-import { Product } from "src/models/product.entity";
-import { Sell_Details } from "src/models/sell_details.entity";
-import { CreateDateColumn, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Client } from "../models/client.entity";
+import { Sell_Details } from "../models/sell_details.entity";
+import { CreateDateColumn, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: "sell"})
 export class Sell {

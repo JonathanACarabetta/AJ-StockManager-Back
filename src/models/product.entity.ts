@@ -1,6 +1,5 @@
-import { Category } from "src/models/category.entity";
-import { Sell } from "src/models/sell.entity";
-import { Sell_Details } from "src/models/sell_details.entity";
+import { Category } from "../models/category.entity";
+import { Sell_Details } from "../models/sell_details.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Provider } from "./provider.entity";
 

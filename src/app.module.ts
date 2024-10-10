@@ -7,6 +7,7 @@ import { CategoryModule } from './modules/category.module';
 import {ClientModule} from "./modules/client.module";
 import { SellModule } from "./modules/sell.module";
 import { Sell_DetailsModule } from './modules/sell_details.module';
+import { ProviderModule } from './modules/provider.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { Sell_DetailsModule } from './modules/sell_details.module';
   CategoryModule,
   ClientModule,
   SellModule,
-  Sell_DetailsModule
+  Sell_DetailsModule,
+  ProviderModule,
 ],
   providers: [],
 })

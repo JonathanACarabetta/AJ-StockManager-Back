@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { ClientRepository } from "./client.repository";
+import { ClientRepository } from "../repository/client.repository";
 import { Client } from "../models/client.entity";
 import { createClientDTO } from "../dtos/createClientDTO";
 
