@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Body, Post, Put, Delete } from "@nestjs/common";
 import { SellService } from "./sell.service";
-import {Sell} from "./sell.entity";
+import {Sell} from "../models/sell.entity";
 import { createSellDTO } from "./dto/createSellDTO";
 
 @Controller("sell")

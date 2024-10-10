@@ -1,17 +1,19 @@
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, In, Raw } from "typeorm";
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { Product } from "./product.entity";
-import { CategoryService } from "../Category/category.service";
-import { CreateProductDTO } from "./dto/createProductDTO";
-import { EditPriceCost } from "./dto/editPriceCost";
-import { ProductsInSell } from "src/Sell/dto/createSellDTO";
+import { Product } from "../models/product.entity";
+import { CategoryService } from "../service/category.service";
+import { CreateProductDTO } from "../dtos/createProductDTO";
+import { EditPriceCost } from "../dtos/editPriceCost";
+import { ProductsInSell } from "src/dtos/createSellDTO";
+import { providerService } from "src/service/provider.service";
 
 @Injectable()
 export class ProductRepository {
     constructor(
         @InjectRepository(Product) private productRepository: Repository<Product>,
-        private readonly categoryService: CategoryService
+        private readonly categoryService: CategoryService,
+        private readonly providerService: providerService,
     ) { };
 
 
@@ -25,19 +27,12 @@ export class ProductRepository {
         }
     }
 
-    async getProductsByProvider(provider: string): Promise<Product[]> {
+    async getProductsByProvider(providerName: string): Promise<Product[]> {
         try {
-            const upperSearch = provider.toUpperCase();
-            const productsByProviderName = await this.productRepository.find({
-                where: {
-                    provider_name: Raw((alias) => `${alias} ILIKE :search`, {
-                        search: `%${upperSearch}%`,
-                    }),
-                }
-            });
-            return productsByProviderName;
+            const provider = await this.providerService.getProviderByName(providerName)
+            return provider.products;
         } catch (error) {
-            console.log(error);
+            throw new NotFoundException("Error al traer productos por proveedor o nombre no existe");
         }
     }
 
@@ -46,7 +41,7 @@ export class ProductRepository {
             const categoryByName = await this.categoryService.getCategoryByName(category);
             return categoryByName.products;
         } catch (error) {
-            throw new NotFoundException("Error al traer Categoria o nombre no existe");
+            throw new NotFoundException("Error al traer productos por Categoria o nombre no existe");
         }
     }
 

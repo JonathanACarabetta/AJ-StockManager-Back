@@ -1,5 +1,5 @@
-import { Product } from "src/Product/product.entity";
-import { Sell } from "src/Sell/sell.entity";
+import { Product } from "src/models/product.entity";
+import { Sell } from "src/models/sell.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "sell_details" })

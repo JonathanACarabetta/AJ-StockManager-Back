@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ProductModule } from './Product/product.module';
+import { ProductModule } from './modules/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeOrmConfig from "./config/database";
-import { CategoryModule } from './Category/category.module';
-import {ClientModule} from "./Client/client.module";
-import { SellModule } from "./Sell/sell.module";
-import { Sell_DetailsModule } from './Sell_Details/sell_details.module';
+import { CategoryModule } from './modules/category.module';
+import {ClientModule} from "./modules/client.module";
+import { SellModule } from "./modules/sell.module";
+import { Sell_DetailsModule } from './modules/sell_details.module';
 
 @Module({
   imports: [
