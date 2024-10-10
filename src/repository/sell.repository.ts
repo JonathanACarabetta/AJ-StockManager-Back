@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Sell } from "./sell.entity";
+import { Sell } from "../models/sell.entity";
 import { Double, Repository } from "typeorm";
-import { createSellDTO } from "./dto/createSellDTO";
-import { ProductService } from "../Product/product.service"
+import { createSellDTO } from "../dtos/createSellDTO";
+import { ProductService } from "../service/product.service"
 import { log } from "console";
-import { ClientService } from "../Client/client.service";
-import { UpdateSellDTO } from "./dto/updateSellDTO";
-import { Sell_DetailsService } from "src/Sell_Details/sell_details.service";
+import { ClientService } from "../service/client.service";
+import { UpdateSellDTO } from "../dtos/updateSellDTO";
+import { Sell_DetailsService } from "src/service/sell_details.service";
 
 @Injectable()
 export class SellRepository {

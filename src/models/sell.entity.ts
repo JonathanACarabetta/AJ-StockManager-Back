@@ -1,6 +1,6 @@
-import { Client } from "src/Client/client.entity";
-import { Product } from "src/Product/product.entity";
-import { Sell_Details } from "src/Sell_Details/sell_details.entity";
+import { Client } from "src/models/client.entity";
+import { Product } from "src/models/product.entity";
+import { Sell_Details } from "src/models/sell_details.entity";
 import { CreateDateColumn, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: "sell"})
@@ -16,6 +16,9 @@ export class Sell {
 
     @Column()
     bill_type: string;
+
+    @CreateDateColumn()
+    date: Date;
 
     @ManyToOne(()=>Client, (client)=> client.sells)
     client: Client;

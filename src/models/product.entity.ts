@@ -1,7 +1,8 @@
-import { Category } from "src/Category/category.entity";
-import { Sell } from "src/Sell/sell.entity";
-import { Sell_Details } from "src/Sell_Details/sell_details.entity";
+import { Category } from "src/models/category.entity";
+import { Sell } from "src/models/sell.entity";
+import { Sell_Details } from "src/models/sell_details.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Provider } from "./provider.entity";
 
 @Entity({
     name: "Product"
@@ -17,6 +18,10 @@ export class Product {
     @ManyToMany(() => Category, (category) => category.products)
     @JoinTable()
     categories: Category[];
+
+    @ManyToMany(() => Provider, (provider) => provider.products)
+    @JoinTable()
+    providers: Provider[];
 
     @Column()
     cost: number;
@@ -34,7 +39,7 @@ export class Product {
 
     @Column()
     brand: string;
-
+    
     @Column()
     provider_name: string;
 

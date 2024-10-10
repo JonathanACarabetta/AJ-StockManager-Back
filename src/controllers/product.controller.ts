@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from "@nestjs/common";
-import { ProductService } from "./product.service";
-import { Product } from "./product.entity";
-import { CreateProductDTO } from "./dto/createProductDTO";
-import { EditPriceCost } from "./dto/editPriceCost";
-import { updateProductPriceAndCostInterceptor } from "../Interceptors/updateProductPriceAndCost.interceptor";
+import { ProductService } from "../service/product.service";
+import { Product } from "../models/product.entity";
+import { CreateProductDTO } from "../dtos/createProductDTO";
+import { EditPriceCost } from "../dtos/editPriceCost";
+import { updateProductPriceAndCostInterceptor } from "../interceptors/updateProductPriceAndCost.interceptor";
 
 
 @Controller("product")
