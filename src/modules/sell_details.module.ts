@@ -3,16 +3,16 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { Category } from "../models/category.entity";
 import { CategoryRepository } from "../repository/category.repository";
 import { CategoryService } from "../service/category.service";
-import { ClientRepository } from "../repository/client.repository";
-import { ClientService } from "../service/client.service";
 import { Product } from "../models/product.entity";
 import { ProductRepository } from "../repository/product.repository";
 import { ProductService } from "../service/product.service";
-import { Sell } from "../models/sell.entity";
 import { Sell_Details } from "../models/sell_details.entity";
+import { Provider } from "src/models/provider.entity";
+import { ProviderService } from "src/service/Provider.service";
+import { ProviderRepository } from "src/repository/Provider.repository";
 
 @Module({
-    imports:[TypeOrmModule.forFeature([Sell_Details,Product,Category])],
-    providers:[ProductService, ProductRepository, CategoryService, CategoryRepository],
+    imports:[TypeOrmModule.forFeature([Sell_Details,Product,Category,Provider])],
+    providers:[ProductService, ProductRepository, CategoryService, CategoryRepository, ProviderService, ProviderRepository],
 })
 export class Sell_DetailsModule{};

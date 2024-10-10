@@ -5,15 +5,15 @@ import { Product } from "../models/product.entity";
 import { CategoryService } from "../service/category.service";
 import { CreateProductDTO } from "../dtos/createProductDTO";
 import { EditPriceCost } from "../dtos/editPriceCost";
-import { ProductsInSell } from "src/dtos/createSellDTO";
-import { providerService } from "src/service/provider.service";
+import { ProductsInSell } from "../dtos/createSellDTO";
+import { ProviderService } from "../service/Provider.service";
 
 @Injectable()
 export class ProductRepository {
     constructor(
         @InjectRepository(Product) private productRepository: Repository<Product>,
         private readonly categoryService: CategoryService,
-        private readonly providerService: providerService,
+        private readonly providerService: ProviderService,
     ) { };
 
 

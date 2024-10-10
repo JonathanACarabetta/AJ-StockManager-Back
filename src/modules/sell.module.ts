@@ -16,10 +16,13 @@ import { Sell } from "../models/sell.entity";
 import { SellService } from "../service/sell.service";
 import { SellController } from "../controllers/sell.controller";
 import { SellRepository } from "../repository/sell.repository";
+import { Provider } from "src/models/provider.entity";
+import { ProviderService } from "src/service/Provider.service";
+import { ProviderRepository } from "src/repository/Provider.repository";
 
 @Module({
-    imports:[TypeOrmModule.forFeature([Sell,Product,Category,Client,Sell_Details])],
-    providers:[SellRepository, SellService, ProductService, ProductRepository, CategoryService, CategoryRepository, ClientRepository, ClientService,Sell_DetailsService,Sell_DetailsRepository],
+    imports:[TypeOrmModule.forFeature([Sell,Product,Category,Client,Sell_Details, Provider])],
+    providers:[SellRepository, SellService, ProductService, ProductRepository, CategoryService, CategoryRepository, ClientRepository, ClientService,Sell_DetailsService,Sell_DetailsRepository, ProviderService, ProviderRepository],
     controllers:[SellController]
 })
 export class SellModule{};
