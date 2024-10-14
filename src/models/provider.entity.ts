@@ -12,7 +12,7 @@ export class Provider {
     @Column()
     address: string;
 
-    @ManyToMany(() => Product, (product) => product.categories)
+    @ManyToMany(() => Product, (product) => product.providers)
     products: Product[];
 
 }

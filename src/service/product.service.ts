@@ -3,7 +3,7 @@ import { ProductRepository } from "../repository/product.repository";
 import { Product } from "../models/product.entity";
 import { CreateProductDTO } from "../dtos/createProductDTO";
 import { EditPriceCost } from "../dtos/editPriceCost";
-import { ProductsInSell } from "src/dtos/createSellDTO";
+import { ProductsInSell } from "../dtos/createSellDTO";
 
 @Injectable()
 export class ProductService {

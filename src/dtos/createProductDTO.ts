@@ -17,7 +17,7 @@ export class CreateProductDTO{
     @IsNumber()
     stock: number;
     
-
+    @IsNotEmpty()
     @IsNumber()
     bar_code: number;
 
@@ -25,10 +25,11 @@ export class CreateProductDTO{
     @IsString()
     brand: string;
 
+    @IsNotEmpty()
     @IsArray()
     categories: number[];
 
     @IsNotEmpty()
-    @IsString()
-    provider_name: string;
+    @IsArray()
+    providers: number[];
 }

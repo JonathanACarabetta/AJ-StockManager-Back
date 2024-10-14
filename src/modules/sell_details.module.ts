@@ -7,9 +7,9 @@ import { Product } from "../models/product.entity";
 import { ProductRepository } from "../repository/product.repository";
 import { ProductService } from "../service/product.service";
 import { Sell_Details } from "../models/sell_details.entity";
-import { Provider } from "src/models/provider.entity";
-import { ProviderService } from "src/service/Provider.service";
-import { ProviderRepository } from "src/repository/Provider.repository";
+import { Provider } from "../models/provider.entity";
+import { ProviderService } from "../service/Provider.service";
+import { ProviderRepository } from "../repository/Provider.repository";
 
 @Module({
     imports:[TypeOrmModule.forFeature([Sell_Details,Product,Category,Provider])],

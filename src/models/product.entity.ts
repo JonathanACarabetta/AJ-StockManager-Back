@@ -38,9 +38,6 @@ export class Product {
 
     @Column()
     brand: string;
-    
-    @Column()
-    provider_name: string;
 
     @OneToMany(()=>Sell_Details,(details)=>details.product)
     sellDetail: Sell_Details[];

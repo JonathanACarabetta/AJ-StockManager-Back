@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { ProviderService } from "../service/Provider.service";
 import { Provider } from "src/models/provider.entity";
+import { createProviderDTO } from "src/dtos/createProviderDTO";
 
 @Controller("provider")
 export class ProviderController{
@@ -17,12 +18,12 @@ export class ProviderController{
     }
 
     @Post("/create")
-    createProvider(@Body() createProviderDTO:Partial<Provider>):Promise<Provider>{
+    createProvider(@Body() createProviderDTO:createProviderDTO):Promise<Provider>{
         return this.providerService.createProvider(createProviderDTO);
     }
 
     @Put("/update/:id")
-    updateProvider(@Param("id") id:number, @Body() updateProviderDTO:Partial<Provider>):Promise<Provider>{
+    updateProvider(@Param("id") id:number, @Body() updateProviderDTO:createProviderDTO):Promise<Provider>{
         return this.providerService.updateProvider(id,updateProviderDTO);
     }
 
