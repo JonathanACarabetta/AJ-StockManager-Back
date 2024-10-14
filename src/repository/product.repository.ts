@@ -47,7 +47,7 @@ export class ProductRepository {
 
     async getProductById(id: number): Promise<Product> {
         try {
-            const product = await this.productRepository.findOne({ where: { id: id }, relations: ["categories"] });
+            const product = await this.productRepository.findOne({ where: { id: id }, relations: ["categories","providers"] });
             if (!product) {
                 throw new NotFoundException(`El producto con id ${id} no existe`);
             }
@@ -84,8 +84,11 @@ export class ProductRepository {
                 stock: productDTO.stock,
                 bar_code: productDTO.bar_code,
                 brand: productDTO.brand,
-                provider_name: productDTO.provider_name
             };
+            if (productDTO.providers.length > 0) {
+                const providers = await this.providerService.getProvidersByIds(productDTO.providers)
+                product.providers = providers;
+            }
             if (productDTO.categories.length > 0) {
                 const categories = await this.categoryService.getCategoriesByIds(productDTO.categories)
                 product.categories = categories;
@@ -108,8 +111,10 @@ export class ProductRepository {
             product.stock = productDTO.stock;
             product.bar_code = productDTO.bar_code;
             product.brand = productDTO.brand;
-            product.provider_name = productDTO.provider_name;
-
+            if (productDTO.providers.length > 0) {
+                const providers = await this.providerService.getProvidersByIds(productDTO.providers)
+                product.providers = providers;
+            }
             if (productDTO.categories.length > 0) {
                 const categories = await this.categoryService.getCategoriesByIds(productDTO.categories)
                 product.categories = categories;

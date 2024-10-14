@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Provider } from "../models/provider.entity";
 import { ProviderRepository } from "../repository/Provider.repository";
+import { createProviderDTO } from "src/dtos/createProviderDTO";
 
 @Injectable()
 export class ProviderService {
@@ -18,11 +19,15 @@ export class ProviderService {
         return this.providerRepository.getProviderById(id);
     }
 
-    public createProvider(provider: Partial<Provider>): Promise<Provider>{
+    getProvidersByIds (ids: Number[]): Promise<Provider[]>{
+        return this.providerRepository.getProvidersByIds(ids);
+    }
+
+    public createProvider(provider: createProviderDTO): Promise<Provider>{
         return this.providerRepository.createProvider(provider);
     }
 
-    public updateProvider(id:number, providerDTO: Partial<Provider>): Promise<Provider>{
+    public updateProvider(id:number, providerDTO: createProviderDTO): Promise<Provider>{
         return this.providerRepository.updateProvider(id, providerDTO);
     }
 

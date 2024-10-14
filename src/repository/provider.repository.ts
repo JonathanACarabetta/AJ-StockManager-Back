@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Provider } from "../models/provider.entity";
-import { Raw, Repository } from "typeorm";
+import { In, Raw, Repository } from "typeorm";
+import { createProviderDTO } from "src/dtos/createProviderDTO";
 
 @Injectable()
 export class ProviderRepository {
@@ -39,7 +40,15 @@ export class ProviderRepository {
         }
     }
 
-    async createProvider(provider: Partial<Provider>): Promise<Provider> {
+    async getProvidersByIds (ids: Number[]): Promise<Provider[]>{
+        try {
+            return await this.providerRepository.findBy({id:In(ids)});
+        } catch (error) {
+            throw new NotFoundException("Error al obtener los proveedores por ids");
+        }
+    }
+
+    async createProvider(provider: createProviderDTO): Promise<Provider> {
         try {
             return await this.providerRepository.save(provider);
         } catch (error) {
@@ -47,7 +56,7 @@ export class ProviderRepository {
         }
     }
 
-    async updateProvider(id:number,providerDTO: Partial<Provider>): Promise<Provider>{
+    async updateProvider(id:number,providerDTO: createProviderDTO): Promise<Provider>{
         try {
             const provider = await this.providerRepository.findOneBy({id:id});
             provider.address = providerDTO.address;
