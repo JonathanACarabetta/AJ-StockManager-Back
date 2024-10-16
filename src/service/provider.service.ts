@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Provider } from "../models/provider.entity";
 import { ProviderRepository } from "../repository/Provider.repository";
-import { createProviderDTO } from "src/dtos/createProviderDTO";
+import { createProviderDTO } from "../dtos/createProviderDTO";
 
 @Injectable()
 export class ProviderService {
