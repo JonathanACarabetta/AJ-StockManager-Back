@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Provider } from "../models/provider.entity";
 import { In, Raw, Repository } from "typeorm";
-import { createProviderDTO } from "src/dtos/createProviderDTO";
+import { createProviderDTO } from "../dtos/createProviderDTO";
 
 @Injectable()
 export class ProviderRepository {
@@ -15,8 +15,7 @@ export class ProviderRepository {
                     name: Raw((alias) => `UPPER(${alias}) LIKE UPPER(:search)`, {
                         search: `%${upperSearch}%`
                     }),
-                }, relations: ["products"]
-            })
+                }, relations: ["products"]})
         } catch (error) {
             throw new NotFoundException("Error al traer el proveedor");
         }
