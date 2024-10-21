@@ -2,9 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { ClientRepository } from "../repository/client.repository";
 import { Client } from "../models/client.entity";
 import { createClientDTO } from "../dtos/createClientDTO";
+import { IClientService } from "./interfaces/IClient.service";
 
 @Injectable()
-export class ClientService{
+export class ClientService implements IClientService{
     constructor(private readonly clientRepository: ClientRepository){}
 
     getAllClients():Promise<Client[]>{

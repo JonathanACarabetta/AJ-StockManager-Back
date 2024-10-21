@@ -1,9 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { CategoryRepository } from "../repository/category.repository";
 import { Category } from "../models/category.entity";
+import { ICategoryService } from "./interfaces/ICategory.service";
 
 @Injectable()
-export class CategoryService {
+export class CategoryService implements ICategoryService{
     constructor(private readonly categoryRepository: CategoryRepository){}
 
     getCategories():Promise<Category[]>{
