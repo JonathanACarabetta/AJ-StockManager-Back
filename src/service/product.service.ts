@@ -4,9 +4,10 @@ import { Product } from "../models/product.entity";
 import { CreateProductDTO } from "../dtos/createProductDTO";
 import { EditPriceCost } from "../dtos/editPriceCost";
 import { ProductsInSell } from "../dtos/createSellDTO";
+import { IProductService } from "./interfaces/IProduct.service";
 
 @Injectable()
-export class ProductService {
+export class ProductService implements IProductService {
     constructor(private readonly productRepository: ProductRepository){}
 
     getProducts():Promise<Product[]>{
@@ -33,7 +34,7 @@ export class ProductService {
         return this.productRepository.updateStock(productToUpdate);
     }
 
-    createProduct(productDTO: CreateProductDTO){
+    createProduct(productDTO: CreateProductDTO):Promise<Product>{
         return this.productRepository.createProduct(productDTO);
     }
 

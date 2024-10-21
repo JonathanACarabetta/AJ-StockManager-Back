@@ -39,7 +39,7 @@ export class ProviderRepository {
         }
     }
 
-    async getProvidersByIds (ids: Number[]): Promise<Provider[]>{
+    async getProvidersByIds (ids: number[]): Promise<Provider[]>{
         try {
             return await this.providerRepository.findBy({id:In(ids)});
         } catch (error) {

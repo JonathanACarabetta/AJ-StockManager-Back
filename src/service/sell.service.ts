@@ -2,9 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { SellRepository } from "../repository/sell.repository";
 import { Sell } from "../models/sell.entity";
 import { createSellDTO } from "../dtos/createSellDTO";
+import { ISellService } from "./interfaces/ISell.service";
 
 @Injectable()
-export class SellService{
+export class SellService implements ISellService{
     constructor(private readonly sellRepository:SellRepository){}
 
     getAllSells():Promise<Sell[]>{
