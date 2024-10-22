@@ -14,7 +14,7 @@ import { ProviderService } from "../service/Provider.service";
 import { ProviderRepository } from "../repository/Provider.repository";
 @Module({
     imports:[TypeOrmModule.forFeature([Product, Category, Provider]), CategoryModule, ProviderModule],
-    providers:[ProductRepository,ProductService, CategoryService, CategoryRepository, ProviderService, ProviderRepository],
+    providers:[ProductRepository,{provide:"ICategoryService",useClass:CategoryService,}, CategoryRepository, {provide:"IProductService",useClass:ProductService,}, {provide:"IProviderService",useClass:ProviderService,},ProviderRepository,CategoryRepository],
     controllers:[ProductController]
 })
 export class ProductModule{};

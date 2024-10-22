@@ -7,7 +7,7 @@ import { ProviderController } from "../controllers/provider.controller";
 
 @Module({
     imports:[TypeOrmModule.forFeature([Provider])],
-    providers:[ProviderRepository, ProviderService],
+    providers:[ProviderRepository, {provide:"IProviderService",useClass:ProviderService,}],
     controllers:[ProviderController]
 })
 export class ProviderModule{};

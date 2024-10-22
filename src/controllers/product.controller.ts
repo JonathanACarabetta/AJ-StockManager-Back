@@ -1,14 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from "@nestjs/common";
-import { ProductService } from "../service/product.service";
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put, UseInterceptors } from "@nestjs/common";
 import { Product } from "../models/product.entity";
 import { CreateProductDTO } from "../dtos/createProductDTO";
 import { EditPriceCost } from "../dtos/editPriceCost";
 import { updateProductPriceAndCostInterceptor } from "../interceptors/updateProductPriceAndCost.interceptor";
+import { IProductService } from "src/service/interfaces/IProduct.service";
 
 
 @Controller("product")
 export class ProductController{
-    constructor(private readonly productService: ProductService){}
+    constructor(@Inject("IProductService") private readonly productService: IProductService){}
 
     @Get()
     getProducts():Promise<Product[]>{

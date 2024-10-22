@@ -6,7 +6,7 @@ import {ClientRepository} from "../repository/client.repository";
 import {ClientController} from "../controllers/client.controller";
 @Module({
     imports:[TypeOrmModule.forFeature([Client])],
-    providers:[ClientService, ClientRepository],
+    providers:[{provide:"IClientService",useClass:ClientService,}, ClientRepository],
     controllers:[ClientController]
 })
 export class ClientModule{};

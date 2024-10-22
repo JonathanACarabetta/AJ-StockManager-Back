@@ -8,7 +8,11 @@ import {ClientModule} from "./modules/client.module";
 import { SellModule } from "./modules/sell.module";
 import { Sell_DetailsModule } from './modules/sell_details.module';
 import { ProviderModule } from './modules/provider.module';
+import { AuthModule } from './modules/auth.module';
+import { JwtModule } from '@nestjs/jwt';
+import { config as dotenvConfig } from "dotenv";
 
+dotenvConfig({ path: ".env" });
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,6 +29,14 @@ import { ProviderModule } from './modules/provider.module';
   SellModule,
   Sell_DetailsModule,
   ProviderModule,
+  AuthModule,
+  JwtModule.register({
+    global: true,
+    secret: process.env.JWT_SECRET,
+    signOptions: {
+      expiresIn: "1h",
+    },
+  })
 ],
   providers: [],
 })

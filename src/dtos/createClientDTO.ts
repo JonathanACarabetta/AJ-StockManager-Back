@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, Matches, MaxLength, MinLength } from "class-validator";
 
 export class createClientDTO {
 
@@ -18,6 +18,20 @@ export class createClientDTO {
     @IsEmail()
     @IsOptional()
     email: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @MinLength(8)
+    @MaxLength(15)
+    @Matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])/, { message: 'La contraseña es muy debil' })
+    password: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @MinLength(8)
+    @MaxLength(15)
+    @Matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])/, { message: 'La contraseña es muy debil' })
+    repeat_password: string;
 
     @IsNumber()
     @IsOptional()

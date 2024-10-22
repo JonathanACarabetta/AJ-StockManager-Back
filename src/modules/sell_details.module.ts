@@ -10,9 +10,11 @@ import { Sell_Details } from "../models/sell_details.entity";
 import { Provider } from "../models/provider.entity";
 import { ProviderService } from "../service/Provider.service";
 import { ProviderRepository } from "../repository/Provider.repository";
+import { Sell_DetailsService } from "src/service/sell_details.service";
+import { Sell_DetailsRepository } from "src/repository/sell_details.repository";
 
 @Module({
     imports:[TypeOrmModule.forFeature([Sell_Details,Product,Category,Provider])],
-    providers:[ProductService, ProductRepository, CategoryService, CategoryRepository, ProviderService, ProviderRepository],
+    providers:[{provide:"ISell_DetailsService",useClass:Sell_DetailsService,},{provide:"IProductService",useClass:ProductService,}, ProductRepository, {provide:"ICategoryService",useClass:CategoryService,}, CategoryRepository, {provide:"IProviderService",useClass:ProviderService,}, ProviderRepository,Sell_DetailsRepository],
 })
 export class Sell_DetailsModule{};

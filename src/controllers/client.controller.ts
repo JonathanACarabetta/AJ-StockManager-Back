@@ -1,11 +1,11 @@
-import { Controller, Get, Param, Post, Body, Put, Delete } from "@nestjs/common";
-import { ClientService } from "../service/client.service";
+import { Controller, Get, Param, Post, Body, Put, Delete, Inject } from "@nestjs/common";
 import { Client } from "../models/client.entity";
 import { createClientDTO } from "../dtos/createClientDTO";
+import { IClientService } from "src/service/interfaces/IClient.service";
 
 @Controller("clients")
 export class ClientController{
-    constructor(private readonly clientService:ClientService){}
+    constructor(@Inject("IClientService")private readonly clientService:IClientService){}
 
     @Get("")
     getAllClients():Promise<Client[]>{
@@ -15,11 +15,6 @@ export class ClientController{
     @Get("/:id")
     getClientById(@Param("id") id: number):Promise<Client>{
         return this.clientService.getClientById(id);
-    }
-
-    @Post("/create")
-    createClient(@Body()clientDTO: createClientDTO):Promise<Client>{
-        return this.clientService.createClient(clientDTO);
     }
 
     @Put("/update/:id")

@@ -1,5 +1,5 @@
-import { createSellDTO } from "src/dtos/createSellDTO"
-import { Sell } from "src/models/sell.entity"
+import { createSellDTO } from "../../dtos/createSellDTO"
+import { Sell } from "../../models/sell.entity"
 
 export interface ISellService{
     /**
