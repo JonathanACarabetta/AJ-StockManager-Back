@@ -1,16 +1,16 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Sell } from "../models/sell.entity";
 import { Repository } from "typeorm";
 import { createSellDTO } from "../dtos/createSellDTO";
-import { ClientService } from "../service/client.service";
-import { Sell_DetailsService } from "../service/sell_details.service";
+import { ISell_DetailsService } from "src/service/interfaces/ISell_details.service";
+import { IClientService } from "src/service/interfaces/IClient.service";
 
 @Injectable()
 export class SellRepository {
     constructor(@InjectRepository(Sell) private sellRepository: Repository<Sell>,
-        private readonly sell_detailsService: Sell_DetailsService,
-        private readonly clientService: ClientService) { }
+        @Inject("ISell_DetailsService") private readonly sell_detailsService: ISell_DetailsService,
+        @Inject("IClientService") private readonly clientService: IClientService) { }
 
     async getAllSells(): Promise<Sell[]> {
         try {

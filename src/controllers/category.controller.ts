@@ -1,10 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { CategoryService } from "../service/category.service";
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from "@nestjs/common";
 import { Category } from "../models/category.entity";
+import { ICategoryService } from "src/service/interfaces/ICategory.service";
 
 @Controller("categories")
 export class CategoryController{
-    constructor(private readonly categoryService: CategoryService){}
+    constructor(@Inject("ICategoryService")private readonly categoryService: ICategoryService){}
 
     @Get("")
     getCategories():Promise<Category[]>{

@@ -1,11 +1,11 @@
-import { Controller, Get, Param, Body, Post, Put, Delete } from "@nestjs/common";
-import { SellService } from "../service/sell.service";
+import { Controller, Get, Param, Body, Post, Put, Delete, Inject } from "@nestjs/common";
 import {Sell} from "../models/sell.entity";
 import { createSellDTO } from "../dtos/createSellDTO";
+import { ISellService } from "src/service/interfaces/ISell.service";
 
 @Controller("sell")
 export class SellController{
-    constructor(private readonly sellService: SellService){}
+    constructor(@Inject("ISellService") private readonly sellService: ISellService){}
 
     @Get("")
     getAllSells():Promise<Sell[]>{

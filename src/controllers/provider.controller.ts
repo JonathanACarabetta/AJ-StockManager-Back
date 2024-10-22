@@ -1,11 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { ProviderService } from "../service/Provider.service";
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from "@nestjs/common";
 import { Provider } from "../models/provider.entity";
 import { createProviderDTO } from "../dtos/createProviderDTO";
+import { IProviderService } from "src/service/interfaces/IProvider.service";
 
 @Controller("provider")
 export class ProviderController{
-    constructor(private readonly providerService: ProviderService){};
+    constructor(@Inject("IProviderService") private readonly providerService: IProviderService){};
 
     @Get()
     getProviders():Promise<Provider[]>{

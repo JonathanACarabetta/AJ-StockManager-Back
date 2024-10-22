@@ -15,6 +15,14 @@ export class ClientRepository {
             throw new NotFoundException(`Error al traer todos los clientes: ${error.message}`);
         }
     }
+    async getClientByEmail(email: string): Promise<Client> {
+        try {
+            const client = await this.clientReposiroty.findOneBy({email:email,isDeleted:false});
+            return client;
+        } catch (error) {
+            throw new NotFoundException(`Cliente con email ${email} no encontrado`)
+        }
+    }
 
     async getClientById(id: number): Promise<Client>{
         try {
@@ -33,6 +41,7 @@ export class ClientRepository {
                 phone_number:clientDTO.phone_number,
                 address:clientDTO.address,
                 email:clientDTO.email,
+                password:clientDTO.password,
                 cuit:clientDTO.cuit,
                 fiscal_key: clientDTO.fiscal_key,
                 isDeleted: false,

@@ -1,19 +1,19 @@
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, In, Raw } from "typeorm";
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { Product } from "../models/product.entity";
-import { CategoryService } from "../service/category.service";
 import { CreateProductDTO } from "../dtos/createProductDTO";
 import { EditPriceCost } from "../dtos/editPriceCost";
 import { ProductsInSell } from "../dtos/createSellDTO";
-import { ProviderService } from "../service/Provider.service";
+import { ICategoryService } from "src/service/interfaces/ICategory.service";
+import { IProviderService } from "src/service/interfaces/IProvider.service";
 
 @Injectable()
 export class ProductRepository {
     constructor(
         @InjectRepository(Product) private productRepository: Repository<Product>,
-        private readonly categoryService: CategoryService,
-        private readonly providerService: ProviderService,
+        @Inject("ICategoryService") private readonly categoryService: ICategoryService,
+        @Inject("IProviderService") private readonly providerService: IProviderService,
     ) { };
 
 

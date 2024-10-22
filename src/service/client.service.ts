@@ -7,6 +7,9 @@ import { IClientService } from "./interfaces/IClient.service";
 @Injectable()
 export class ClientService implements IClientService{
     constructor(private readonly clientRepository: ClientRepository){}
+    getClientByEmail(email: string): Promise<Client> {
+        return this.clientRepository.getClientByEmail(email);
+    }
 
     getAllClients():Promise<Client[]>{
         return this.clientRepository.getAllClients();
