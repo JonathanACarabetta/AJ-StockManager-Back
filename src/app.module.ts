@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ProductModule } from './modules/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -13,6 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { config as dotenvConfig } from "dotenv";
 
 dotenvConfig({ path: ".env" });
+@Global()
 @Module({
   imports: [
     ConfigModule.forRoot({
