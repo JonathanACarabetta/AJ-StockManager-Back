@@ -1,3 +1,4 @@
+import { Roles } from "../utils/roles.enum";
 import { Sell } from "../models/sell.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -20,6 +21,9 @@ export class Client {
 
     @Column({nullable:true})
     password: string;
+
+    @Column({ type: "enum", enum: Roles,default: Roles.USER, nullable:false})
+    role: Roles;
 
     @Column({unique: true, nullable:true, type:"bigint"})
     cuit: number;

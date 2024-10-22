@@ -38,8 +38,8 @@ export class AuthService implements IAuthService{
             if(!isPasswordValid)throw new BadRequestException("Email and Password don't match")
             const clientPayload={
                 id:client.id,
-                email:client.email
-                //rol: client.rol 
+                email:client.email,
+                role: client.role
             }
             const jwtToken = this.jwtService.sign(clientPayload);
             const authInfo : AuthInfoDTO ={
