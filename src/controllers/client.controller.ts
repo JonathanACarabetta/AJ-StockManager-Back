@@ -19,16 +19,28 @@ export class ClientController{
     }
 
     @Get("/:id")
+    @UseGuards(AuthenticationGuard)
     getClientById(@Param("id") id: number):Promise<Client>{
         return this.clientService.getClientById(id);
     }
 
+    @Post("/create")
+    @Role(Roles.ADMIN)
+    @UseGuards(AuthenticationGuard, AuthorizationGuard)
+    createClient(@Body()clientDTO: createClientDTO):Promise<Client>{
+        return this.clientService.createClient(clientDTO);
+    }
+
     @Put("/update/:id")
+    @Role(Roles.ADMIN)
+    @UseGuards(AuthenticationGuard, AuthorizationGuard)
     updateClient(@Body()clientDTO: createClientDTO, @Param("id") id : number):Promise<Client>{
         return this.clientService.updateClient(id,clientDTO);
     }
 
     @Delete("/delete/:id")
+    @Role(Roles.ADMIN)
+    @UseGuards(AuthenticationGuard, AuthorizationGuard)
     deleteClient(@Param("id") id: number):Promise<String>{
         return this.clientService.deleteClient(id);
     }
