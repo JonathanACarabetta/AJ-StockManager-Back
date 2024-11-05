@@ -23,21 +23,21 @@ export class CategoryController{
     }
 
     @Post("/create")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     createCategory(@Body() category: Partial<Category>):Promise<Category>{
         return this.categoryService.createCategory(category);
     }
 
     @Put("/update/:id")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     updateCategory(@Body() updatedCategory: Partial<Category>, @Param("id") id: number): Promise<Category>{
         return this.categoryService.updateCategory(id, updatedCategory);
     }
 
     @Delete("/delete/:id")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     deleteCategory(@Param("id") id: number): Promise<String>{
         return this.categoryService.deleteCategory(id);

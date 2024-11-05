@@ -14,8 +14,8 @@ export class AuthController {
     constructor(@Inject("IAuthService") private readonly authService:IAuthService){}
 
     @Post("/create_user")
-    @Role(Roles.ADMIN)
-    @UseGuards(AuthenticationGuard, AuthorizationGuard)
+    //@Role(Roles.USER)
+    //@UseGuards(AuthenticationGuard, AuthorizationGuard)
     singUp(@Body()createClient: createClientDTO): Promise<Partial<Client>>{
         return this.authService.singUp(createClient)
     }

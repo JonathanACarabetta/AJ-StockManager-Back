@@ -11,6 +11,7 @@ import { ProviderModule } from './modules/provider.module';
 import { AuthModule } from './modules/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { config as dotenvConfig } from "dotenv";
+import { SeedersModule } from './modules/dataLoaderModule';
 
 dotenvConfig({ path: ".env" });
 @Global()
@@ -31,6 +32,7 @@ dotenvConfig({ path: ".env" });
   Sell_DetailsModule,
   ProviderModule,
   AuthModule,
+  SeedersModule,
   JwtModule.register({
     global: true,
     secret: process.env.JWT_SECRET,

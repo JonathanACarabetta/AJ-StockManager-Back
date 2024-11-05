@@ -24,21 +24,21 @@ export class ProviderController{
     }
 
     @Post("/create")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     createProvider(@Body() createProviderDTO:createProviderDTO):Promise<Provider>{
         return this.providerService.createProvider(createProviderDTO);
     }
 
     @Put("/update/:id")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     updateProvider(@Param("id") id:number, @Body() updateProviderDTO:createProviderDTO):Promise<Provider>{
         return this.providerService.updateProvider(id,updateProviderDTO);
     }
 
     @Delete("/delete/:id")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     deleteProviderById(@Param("id") id:number):Promise<string>{
         return this.providerService.deleteProvider(id);

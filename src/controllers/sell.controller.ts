@@ -36,7 +36,7 @@ export class SellController{
     }
 
     @Delete("/delete/:id")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     deleteSell(@Param("id") id :number):Promise<String>{
         return this.sellService.deleteSell(id);

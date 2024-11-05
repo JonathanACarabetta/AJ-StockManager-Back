@@ -19,7 +19,7 @@ export class CreateProductDTO{
     
     @IsNotEmpty()
     @IsNumber()
-    bar_code: number;
+    bar_code: string;
 
     @IsNotEmpty()
     @IsString()

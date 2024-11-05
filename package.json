@@ -26,13 +26,19 @@
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/typeorm": "^10.0.2",
+    "afip.ts": "^3.2.2",
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "class-validator": "^0.14.1",
+    "fs": "^0.0.1-security",
     "nodemailer": "^6.9.15",
     "pg": "^8.13.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.20"
+    "soap": "^1.1.5",
+    "typeorm": "^0.3.20",
+    "xml-crypto": "^6.0.0",
+    "xmlbuilder2": "^3.1.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
