@@ -39,7 +39,7 @@ export class ProductController{
     }
 
     @Post("/create")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     createProduct(@Body() productDTO: CreateProductDTO):Promise<Product>{
         return this.productService.createProduct(productDTO);
@@ -53,7 +53,7 @@ export class ProductController{
     }
 
     @Put("/update/:id")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     updateProduct(@Body() productDTO: CreateProductDTO,@Param("id") id:number):Promise<Product>{
         return this.productService.updateProduct(id, productDTO);
@@ -61,7 +61,7 @@ export class ProductController{
 
 
     @Delete("/delete/:id")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     deleteProduct(@Param("id") id:number):Promise<String>{
         return this.productService.deleteProduct(id);

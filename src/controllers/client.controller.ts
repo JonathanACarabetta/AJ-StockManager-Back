@@ -12,7 +12,7 @@ export class ClientController{
     constructor(@Inject("IClientService")private readonly clientService:IClientService){}
 
     @Get("")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     getAllClients():Promise<Client[]>{
         return this.clientService.getAllClients();
@@ -25,21 +25,21 @@ export class ClientController{
     }
 
     @Post("/create")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     createClient(@Body()clientDTO: createClientDTO):Promise<Client>{
         return this.clientService.createClient(clientDTO);
     }
 
     @Put("/update/:id")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     updateClient(@Body()clientDTO: createClientDTO, @Param("id") id : number):Promise<Client>{
         return this.clientService.updateClient(id,clientDTO);
     }
 
     @Delete("/delete/:id")
-    @Role(Roles.ADMIN)
+    @Role(Roles.USER)
     @UseGuards(AuthenticationGuard, AuthorizationGuard)
     deleteClient(@Param("id") id: number):Promise<String>{
         return this.clientService.deleteClient(id);

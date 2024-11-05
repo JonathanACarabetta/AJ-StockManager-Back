@@ -1,7 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import {ticketReturn} from './helpers/afipAuth';
 
 async function bootstrap() {
+  //const res = await ticketReturn();
+  //console.log(res);
   const app = await NestFactory.create(AppModule);
   await app.listen(3000);
 }

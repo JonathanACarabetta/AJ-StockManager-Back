@@ -1,5 +1,5 @@
-import { Category } from "../models/category.entity";
-import { Sell_Details } from "../models/sell_details.entity";
+import { Category } from "./category.entity";
+import { Sell_Details } from "./sell_details.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Provider } from "./provider.entity";
 
@@ -22,19 +22,25 @@ export class Product {
     @JoinTable()
     providers: Provider[];
 
-    @Column()
+    @Column({
+        type: "float"
+    })
     cost: number;
 
-    @Column()
+    @Column({
+        type: "float"
+    })
     price: number;
 
-    @Column()
+    @Column({
+        type: "int"
+    })
     stock: number;
 
     @Column({
         unique: true
     })
-    bar_code: number;
+    bar_code: string;
 
     @Column()
     brand: string;
