@@ -9,24 +9,21 @@ import { IProductService } from "src/service/interfaces/IProduct.service";
 export class Sell_DetailsRepository {
     constructor(@InjectRepository(Sell_Details) private sell_detailsRepository: Repository<Sell_Details>,
         @Inject("IProductService") private readonly productService: IProductService) { }
-    async createSell_details(productsInSell: ProductsInSell[]): Promise<Sell_Details[]> {
+    async createSell_details(productsInSell: ProductsInSell[]): Promise<Sell_Details> {
         try {
-            const sells_details: Sell_Details[] = await Promise.all(
+            const sell_detail: Sell_Details = new Sell_Details();
                 productsInSell.map(async (productInSell) => {
                     try {
-                        const sell_detail: Sell_Details = new Sell_Details();
                         const product = await this.productService.getProductById(productInSell.productId);
                         if (product.stock < productInSell.quantity) throw new BadRequestException("No hay suficiente Stock para realizar la venta")
 
-                        sell_detail.product = await this.productService.updateStock(productInSell);
-                        sell_detail.quantity = productInSell.quantity;
-                        sell_detail.total = product.price * productInSell.quantity;
-                        return sell_detail;
+                        sell_detail.products.push(await this.productService.updateStock(productInSell));
+                        sell_detail.total = (product.price * productInSell.quantity) + sell_detail.total;
                     } catch (error) {
                         throw error;
                     }
-                }))
-            return await this.sell_detailsRepository.save(sells_details);
+                })
+            return await this.sell_detailsRepository.save(sell_detail);
         } catch (error) {
             throw error;
         }

@@ -1,11 +1,12 @@
-import { Controller, Get, Param, Body, Post, Put, Delete, Inject, UseGuards } from "@nestjs/common";
+import { Controller, Get, Param, Body, Post, Put, Delete, Inject, UseGuards, Query } from "@nestjs/common";
 import {Sell} from "../models/sell.entity";
 import { createSellDTO } from "../dtos/createSellDTO";
-import { ISellService } from "src/service/interfaces/ISell.service";
-import { AuthenticationGuard } from "src/guards/authentication.guard";
-import { AuthorizationGuard } from "src/guards/authorization.guard";
-import { Role } from "src/decorators/role.decorator";
-import { Roles } from "src/utils/roles.enum";
+import { ISellService } from "../service/interfaces/ISell.service";
+import { AuthenticationGuard } from "../guards/authentication.guard";
+import { AuthorizationGuard } from "../guards/authorization.guard";
+import { Role } from "../decorators/role.decorator";
+import { Roles } from "../utils/roles.enum";
+import { MonthInfo } from "../dtos/monthInfo";
 
 @Controller("sell")
 export class SellController{
@@ -15,6 +16,18 @@ export class SellController{
     @UseGuards(AuthenticationGuard)
     getAllSells():Promise<Sell[]>{
         return this.sellService.getAllSells();
+    }
+
+    @Get("/admin-info/month")
+    @UseGuards(AuthenticationGuard)
+    getSellsByMonth(@Query("month") month:string, @Query("year") year:string):Promise<Sell[]>{
+        return this.sellService.getSellsByMonth(month,year);
+    }
+
+    @Get("/admin-info/month/totals")
+    @UseGuards(AuthenticationGuard)
+    getSellsInfoByMonth(@Query("month") month:string, @Query("year") year:string):Promise<MonthInfo>{
+        return this.sellService.getSellsInfoByMonth(month,year);
     }
 
     @Get("/:id")

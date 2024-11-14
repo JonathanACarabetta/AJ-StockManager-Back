@@ -7,5 +7,5 @@ export interface ISell_DetailsService{
      * @param productsInSell ProductsInSell
      * @returns Sell_Details[]
      */
-    createSell_details(productsInSell: ProductsInSell[]): Promise<Sell_Details[]>
+    createSell_details(productsInSell: ProductsInSell[]): Promise<Sell_Details>
 }

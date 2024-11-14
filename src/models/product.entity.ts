@@ -4,7 +4,7 @@ import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColum
 import { Provider } from "./provider.entity";
 
 @Entity({
-    name: "Product"
+    name: "product"
 })
 export class Product {
 
@@ -45,6 +45,6 @@ export class Product {
     @Column()
     brand: string;
 
-    @OneToMany(()=>Sell_Details,(details)=>details.product)
+    @ManyToMany(()=>Sell_Details,(details)=>details.products)
     sellDetail: Sell_Details[];
 }
