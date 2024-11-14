@@ -3,10 +3,18 @@ import { SellRepository } from "../repository/sell.repository";
 import { Sell } from "../models/sell.entity";
 import { createSellDTO } from "../dtos/createSellDTO";
 import { ISellService } from "./interfaces/ISell.service";
+import { MonthInfo } from "../dtos/monthInfo";
 
 @Injectable()
 export class SellService implements ISellService{
     constructor(private readonly sellRepository:SellRepository){}
+    getSellsInfoByMonth(month: string, year: string): Promise<MonthInfo> {
+        return this.sellRepository.getSellsInfoByMonth(Number(month), Number(year));
+    }
+
+    getSellsByMonth(month: string, year: string): Promise<Sell[]> {
+        return this.sellRepository.getSellsByMonth(Number(month), Number(year));
+    }
 
     getAllSells():Promise<Sell[]>{
         return this.sellRepository.getAllSells();

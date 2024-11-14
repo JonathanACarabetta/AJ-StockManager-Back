@@ -1,6 +1,6 @@
 import { Client } from "./client.entity";
 import { Sell_Details } from "./sell_details.entity";
-import { CreateDateColumn, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CreateDateColumn, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, OneToOne } from "typeorm";
 
 @Entity({name: "sell"})
 export class Sell {
@@ -9,9 +9,6 @@ export class Sell {
 
     @Column()
     pay_method: string;
-
-    @Column({ default: 0, type: "float" })
-    total: number;
 
     @Column()
     bill_type: string;
@@ -22,6 +19,6 @@ export class Sell {
     @ManyToOne(()=>Client, (client)=> client.sells)
     client: Client;
 
-    @OneToMany(() => Sell_Details, (details) => details.sell)
-    details: Sell_Details[];
+    @OneToOne(() => Sell_Details, (details) => details.sell)
+    detail: Sell_Details;
 }

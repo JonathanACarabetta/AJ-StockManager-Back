@@ -4,17 +4,23 @@ import { Sell } from "../models/sell.entity";
 import { Repository } from "typeorm";
 import { createSellDTO } from "../dtos/createSellDTO";
 import { ISell_DetailsService } from "src/service/interfaces/ISell_details.service";
-import { IClientService } from "src/service/interfaces/IClient.service";
+import { IClientService } from "../service/interfaces/IClient.service";
+import { MonthInfo } from "../dtos/monthInfo";
+import { Product } from "src/models/product.entity";
+import { IProductService } from "src/service/interfaces/IProduct.service";
 
 @Injectable()
 export class SellRepository {
-    constructor(@InjectRepository(Sell) private sellRepository: Repository<Sell>,
+    constructor(
+        @InjectRepository(Sell) private sellRepository: Repository<Sell>,
         @Inject("ISell_DetailsService") private readonly sell_detailsService: ISell_DetailsService,
-        @Inject("IClientService") private readonly clientService: IClientService) { }
+        @Inject("IClientService") private readonly clientService: IClientService,
+        @Inject("IProductService") private readonly productService: IProductService,
+    ) { }
 
     async getAllSells(): Promise<Sell[]> {
         try {
-            return await this.sellRepository.find({relations: ["client", "details"]});
+            return await this.sellRepository.find({ relations: ["client", "details"] });
         } catch (error) {
             throw new NotFoundException("Error al traer las ventas");
         }
@@ -30,18 +36,67 @@ export class SellRepository {
         }
     }
 
+    async getSellsByMonth(month: number, year: number): Promise<Sell[]> {
+        try {
+            const sellsByMonth = await this.sellRepository.createQueryBuilder(`sell`)
+                .where(`EXTRACT(MONTH FROM sell.date) = :month`, { month })
+                .leftJoinAndSelect("sell_details", "SellDetails")
+                .leftJoin("product", "products")
+                .andWhere(`EXTRACT(YEAR FROM sell.date) = :year`, { year })
+                .getMany()
+            return sellsByMonth;
+        } catch (error) {
+            throw new NotFoundException(`No existen ventas para este mes`)
+        }
+    }
+
+    async getSellsInfoByMonth(month: number, year: number): Promise<MonthInfo> {
+        try {
+            const sellsByMonth = await this.getSellsByMonth(month, year);
+            const productMap = new Map();
+            let total = 0;
+            sellsByMonth.forEach((sell) => {
+                sell.detail.products.forEach((product) => {
+                    if (!productMap.has(product.id)) {
+                        productMap.set(product.id, 1)
+                    } else {
+                        productMap.set(product.id, productMap.get(product.id) + 1)
+                    }
+                })
+                total = sell.detail.total + total;
+            });
+            const mostTimesSelled = {
+                id: 0,
+                timesSelled: 0
+            }
+            productMap.forEach((value, key) => {
+                if (value > mostTimesSelled.timesSelled) {
+                    mostTimesSelled.id = key;
+                    mostTimesSelled.timesSelled = value;
+                }
+            })
+            const mostSelledProduct:Product= await this.productService.getProductById(mostTimesSelled.id);
+            return {
+                most_Selled_product:mostSelledProduct,
+                period: {
+                    month: month,
+                    year:year
+                },
+                total:total
+            };
+
+        } catch (error) {
+            throw new NotFoundException(`No existen ventas para este mes`)
+        }
+    }
+
     async createSell(sellDto: createSellDTO): Promise<Sell> {
         try {
             const sell: Sell = new Sell();
             sell.bill_type = sellDto.bill_type;
             sell.pay_method = sellDto.pay_method;
             sell.client = await this.clientService.getClientById(sellDto.client_id);
-            sell.details = await this.sell_detailsService.createSell_details(sellDto.products);
-            let aux = 0;
-            sell.details.forEach((detail)=>{
-                aux = detail.total + aux;
-            })
-            sell.total = aux;
+            sell.detail = await this.sell_detailsService.createSell_details(sellDto.products);
             return await this.sellRepository.save(sell);
         } catch (error) {
             throw new NotFoundException(error.message);
@@ -54,12 +109,7 @@ export class SellRepository {
             sell.bill_type = sellDto.bill_type;
             sell.pay_method = sellDto.pay_method;
             sell.client = await this.clientService.getClientById(sellDto.client_id);
-            sell.details = await this.sell_detailsService.createSell_details(sellDto.products);
-            let aux = 0;
-            sell.details.forEach((detail)=>{
-                aux = detail.total + aux;
-            })
-            sell.total = aux;
+            sell.detail = await this.sell_detailsService.createSell_details(sellDto.products);
             return await this.sellRepository.save(sell);
         } catch (error) {
             throw new NotFoundException(error.message);

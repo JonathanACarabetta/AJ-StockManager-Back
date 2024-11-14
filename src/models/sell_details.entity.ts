@@ -1,23 +1,20 @@
 import { Product } from "./product.entity";
 import { Sell } from "./sell.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "sell_details" })
 export class Sell_Details {
     @PrimaryGeneratedColumn({ type: "bigint" })
     id: number;
 
-    @ManyToOne(() => Sell, (detail) => detail.details, {
+    @OneToOne(() => Sell, (detail) => detail.detail, {
         onDelete: "CASCADE",
         cascade: ["soft-remove"],
     })
     sell: Sell;
 
-    @ManyToOne(() => Product, (product) => product.sellDetail)
-    product: Product;
-
-    @Column({ default: 1 })
-    quantity: number;
+    @ManyToMany(() => Product, (products) => products.sellDetail)
+    products: Product[];
 
     @Column({ type: "float" })
     total: number;

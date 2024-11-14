@@ -1,3 +1,4 @@
+import { MonthInfo } from "../../dtos/monthInfo"
 import { createSellDTO } from "../../dtos/createSellDTO"
 import { Sell } from "../../models/sell.entity"
 
@@ -14,6 +15,22 @@ export interface ISellService{
      * @returns Sell
      */
     getSellById(id:number):Promise<Sell>
+
+    /**
+     * @description return all sells of an specific year and month
+     * @param month number
+     * @param year number
+     * @returns Sell[]
+     */
+    getSellsByMonth(month: string, year:string): Promise<Sell[]>
+
+    /**
+     * @description return information about a specific year and month
+     * @param month number
+     * @param year number
+     * @returns MonthInfo
+     */
+    getSellsInfoByMonth(month: string, year:string): Promise<MonthInfo>
 
     /**
      * @description creates a new Sell
