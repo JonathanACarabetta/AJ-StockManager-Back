@@ -1,25 +1,32 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Category } from "src/models/category.entity";
-import { Product } from "src/models/product.entity";
-import { Provider } from "src/models/provider.entity";
+import { Category } from "../models/category.entity";
+import { Product } from "../models/product.entity";
+import { Provider } from "../models/provider.entity";
 import { dataLoader } from "../helpers/dataLoader";
-import { ProductService } from "src/service/product.service";
-import { ProviderService } from "src/service/Provider.service";
-import { CategoryService } from "src/service/category.service";
-import { ProductRepository } from "src/repository/product.repository";
-import { ProviderRepository } from "src/repository/Provider.repository";
-import { CategoryRepository } from "src/repository/category.repository";
+import { ProductService } from "../service/product.service";
+import { ProviderService } from "../service/Provider.service";
+import { CategoryService } from "../service/category.service";
+import { ProductRepository } from "../repository/product.repository";
+import { ProviderRepository } from "../repository/Provider.repository";
+import { CategoryRepository } from "../repository/category.repository";
+import { ClientService } from "../service/client.service";
+import { ClientRepository } from "../repository/client.repository";
+import { Client } from "../models/client.entity";
+import { AuthService } from "src/service/auth.service";
 
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Product, Category, Provider]),
+    TypeOrmModule.forFeature([Product, Category, Provider,Client]),
   ],
   providers: [
     { provide: "IProductService", useClass: ProductService, },
     { provide: "IProviderService", useClass: ProviderService, },
     { provide: "ICategoryService", useClass: CategoryService, },
+    { provide: "IClientService", useClass: ClientService},
+    { provide: "IAuthService", useClass: AuthService},
+    ClientRepository,
     ProductRepository,
     ProviderRepository,
     CategoryRepository,
