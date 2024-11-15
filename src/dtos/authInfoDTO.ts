@@ -1,4 +1,5 @@
 import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { Roles } from "../utils/roles.enum";
 
 export class AuthInfoDTO {
     @IsNotEmpty()
@@ -12,4 +13,7 @@ export class AuthInfoDTO {
     @IsNotEmpty()
     @IsString()
     token: string;
+
+    @IsNotEmpty()
+    role: Roles
 }

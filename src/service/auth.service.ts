@@ -45,7 +45,8 @@ export class AuthService implements IAuthService{
             const authInfo : AuthInfoDTO ={
                 token: jwtToken,
                 client_email: client.email,
-                client_id: client.id
+                client_id: client.id,
+                role: client.role,
             }
             return authInfo;
         } catch (error) {

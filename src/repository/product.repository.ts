@@ -7,6 +7,8 @@ import { EditPriceCost } from "../dtos/editPriceCost";
 import { ProductsInSell } from "../dtos/createSellDTO";
 import { ICategoryService } from "src/service/interfaces/ICategory.service";
 import { IProviderService } from "src/service/interfaces/IProvider.service";
+import { Category } from "src/models/category.entity";
+import { Provider } from "src/models/provider.entity";
 
 @Injectable()
 export class ProductRepository {
@@ -86,11 +88,11 @@ export class ProductRepository {
                 brand: productDTO.brand,
             };
             if (productDTO.providers.length > 0) {
-                const providers = await this.providerService.getProvidersByIds(productDTO.providers)
+                const providers: Provider[] = await this.providerService.getProvidersByIds(productDTO.providers)
                 product.providers = providers;
             }
             if (productDTO.categories.length > 0) {
-                const categories = await this.categoryService.getCategoriesByIds(productDTO.categories)
+                const categories: Category[] = await this.categoryService.getCategoriesByIds(productDTO.categories)
                 product.categories = categories;
             }
             const createdProduct = await this.productRepository.save(product);
