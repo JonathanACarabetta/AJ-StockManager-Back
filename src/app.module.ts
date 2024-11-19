@@ -1,17 +1,10 @@
 import { Global, Module } from '@nestjs/common';
-import { ProductModule } from './modules/product.module';
+import { AuthModule, CategoryModule, ClientModule, ProductModule, ProviderModule, SeedersModule, Sell_DetailsModule, SellModule } from './modules';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeOrmConfig from "./config/database";
-import { CategoryModule } from './modules/category.module';
-import {ClientModule} from "./modules/client.module";
-import { SellModule } from "./modules/sell.module";
-import { Sell_DetailsModule } from './modules/sell_details.module';
-import { ProviderModule } from './modules/provider.module';
-import { AuthModule } from './modules/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { config as dotenvConfig } from "dotenv";
-import { SeedersModule } from './modules/dataLoaderModule';
 
 dotenvConfig({ path: ".env" });
 @Global()

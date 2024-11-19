@@ -1,6 +1,6 @@
-import { createClientDTO } from "src/dtos/createClientDTO";
-import { AuthInfoDTO } from "../../dtos/AuthInfoDTO";
-import { Client } from "../../models/client.entity";
+import { createClientDTO } from "../../dtos";
+import { AuthInfoDTO } from "../../dtos";
+import { Client } from "../../models";
 
 export interface IAuthService{
     /**

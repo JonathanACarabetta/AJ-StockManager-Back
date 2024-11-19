@@ -1,5 +1,14 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
-import { Product } from "../models/product.entity";
+import { Product } from "../models";
+
+class Period{
+    @IsNumber()
+    @IsNotEmpty()
+    month:number;
+    @IsNumber()
+    @IsNotEmpty()
+    year:number
+}
 
 export class MonthInfo{
     @IsNumber()
@@ -12,13 +21,4 @@ export class MonthInfo{
     @IsString()
     @IsNotEmpty()
     period:Period;
-}
-
-class Period {
-    @IsNumber()
-    @IsNotEmpty()
-    month:number;
-    @IsNumber()
-    @IsNotEmpty()
-    year:number
 }

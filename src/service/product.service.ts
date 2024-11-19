@@ -1,10 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { ProductRepository } from "../repository/product.repository";
-import { Product } from "../models/product.entity";
-import { CreateProductDTO } from "../dtos/createProductDTO";
-import { EditPriceCost } from "../dtos/editPriceCost";
-import { ProductsInSell } from "../dtos/createSellDTO";
-import { IProductService } from "./interfaces/IProduct.service";
+import { ProductRepository } from "../repository";
+import { Product } from "../models";
+import { CreateProductDTO, EditPriceCost, ProductsInSell } from "../dtos";
+import { IProductService } from "./interfaces";
 
 @Injectable()
 export class ProductService implements IProductService {

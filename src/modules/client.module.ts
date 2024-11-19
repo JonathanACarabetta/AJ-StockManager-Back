@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Client } from "../models/client.entity";
-import {ClientService} from "../service/client.service";
-import {ClientRepository} from "../repository/client.repository";
-import {ClientController} from "../controllers/client.controller";
+import { ClientController } from "../controllers";
+import { ClientRepository } from "../repository";
+import { ClientService } from "../service";
+import { Client } from "../models";
 @Module({
     imports:[TypeOrmModule.forFeature([Client])],
     providers:[{provide:"IClientService",useClass:ClientService,}, ClientRepository],

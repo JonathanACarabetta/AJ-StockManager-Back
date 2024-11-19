@@ -1,5 +1,5 @@
-import { createProviderDTO } from "../../dtos/createProviderDTO";
-import { Provider } from "../../models/provider.entity";
+import { createProviderDTO } from "../../dtos";
+import { Provider } from "../../models";
 
 export interface IProviderService{
     /**

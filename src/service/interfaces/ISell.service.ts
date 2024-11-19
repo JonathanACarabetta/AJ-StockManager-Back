@@ -1,6 +1,5 @@
-import { MonthInfo } from "../../dtos/monthInfo"
-import { createSellDTO } from "../../dtos/createSellDTO"
-import { Sell } from "../../models/sell.entity"
+import { createSellDTO, MonthInfo } from "../../dtos"
+import { Sell } from "../../models"
 
 export interface ISellService{
     /**

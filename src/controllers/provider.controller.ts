@@ -1,11 +1,10 @@
 import { Body, Controller, Delete, Get, Inject, Param, Post, Put, UseGuards } from "@nestjs/common";
-import { Provider } from "../models/provider.entity";
-import { createProviderDTO } from "../dtos/createProviderDTO";
-import { IProviderService } from "src/service/interfaces/IProvider.service";
-import { Role } from "src/decorators/role.decorator";
-import { Roles } from "src/utils/roles.enum";
-import { AuthenticationGuard } from "src/guards/authentication.guard";
-import { AuthorizationGuard } from "src/guards/authorization.guard";
+import { Provider } from "../models";
+import { createProviderDTO } from "../dtos";
+import { IProviderService } from "../service/interfaces";
+import { Role } from "../decorators/role.decorator";
+import { Roles } from "../utils/roles.enum";
+import { AuthenticationGuard, AuthorizationGuard } from "../guards";
 
 @Controller("provider")
 export class ProviderController{

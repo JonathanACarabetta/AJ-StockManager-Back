@@ -1,10 +1,8 @@
 import { BadRequestException, Inject, Injectable } from "@nestjs/common";
-import { IAuthService } from "./interfaces/IAuth.service";
-import { AuthInfoDTO } from "../dtos/AuthInfoDTO";
-import * as bcrypt from "bcrypt";
-import { createClientDTO } from "../dtos/createClientDTO";
-import { Client } from "../models/client.entity";
-import { IClientService } from "./interfaces/IClient.service";
+import { IAuthService, IClientService } from "./interfaces";
+import { AuthInfoDTO, createClientDTO } from "../dtos";
+import { hash, compare } from "bcrypt";
+import { Client } from "../models";
 import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
@@ -19,7 +17,7 @@ export class AuthService implements IAuthService{
             const findClient = await this.clientService.getClientByEmail(createClient.email);
             if(findClient) throw new BadRequestException("The email already exists!")
             if(createClient.password!=createClient.repeat_password)throw new BadRequestException("Passwords doesn't match!")
-            const hashedPassword = await bcrypt.hash(createClient.password,10);
+            const hashedPassword = await hash(createClient.password,10);
             if(!hashedPassword) throw new BadRequestException("Password can't be hashed")
             createClient.password = hashedPassword;
             const client = await this.clientService.createClient(createClient);
@@ -34,7 +32,7 @@ export class AuthService implements IAuthService{
         try {
             const client = await this.clientService.getClientByEmail(email);
             if(!client) throw new BadRequestException("User don't exists!")
-            const isPasswordValid = await bcrypt.compare(password,client.password);
+            const isPasswordValid = await compare(password,client.password);
             if(!isPasswordValid)throw new BadRequestException("Email and Password don't match")
             const clientPayload={
                 id:client.id,

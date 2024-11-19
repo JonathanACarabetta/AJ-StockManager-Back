@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import {ticketReturn} from './helpers/afipAuth';
 
 async function bootstrap() {
   //const res = await ticketReturn();

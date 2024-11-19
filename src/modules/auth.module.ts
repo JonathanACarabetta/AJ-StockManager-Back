@@ -1,11 +1,10 @@
 import { Module } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { AuthController } from "src/controllers/auth.controller";
-import { Client } from "src/models/client.entity";
-import { ClientRepository } from "src/repository/client.repository";
-import { AuthService } from "src/service/auth.service";
-import { ClientService } from "src/service/client.service";
+import { AuthController } from "../controllers";
+import { Client } from "../models";
+import { ClientRepository } from "../repository";
+import { AuthService,ClientService } from "../service";
+
 
 @Module({
     imports: [TypeOrmModule.forFeature([Client])],

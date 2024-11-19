@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Inject, Param, Post, Put, UseGuards } from "@nestjs/common";
-import { Category } from "../models/category.entity";
-import { ICategoryService } from "src/service/interfaces/ICategory.service";
-import { Roles } from "src/utils/roles.enum";
-import { Role } from "src/decorators/role.decorator";
-import { AuthenticationGuard } from "src/guards/authentication.guard";
-import { AuthorizationGuard } from "src/guards/authorization.guard";
+import { Category } from "../models";
+import { ICategoryService } from "../service/interfaces";
+import { Roles } from "../utils/roles.enum";
+import { Role } from "../decorators/role.decorator";
+import { AuthenticationGuard, AuthorizationGuard } from "../guards";
+
 
 @Controller("categories")
 export class CategoryController{

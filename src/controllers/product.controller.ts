@@ -1,13 +1,11 @@
 import { Body, Controller, Delete, Get, Inject, Param, Post, Put, UseGuards, UseInterceptors } from "@nestjs/common";
-import { Product } from "../models/product.entity";
-import { CreateProductDTO } from "../dtos/createProductDTO";
-import { EditPriceCost } from "../dtos/editPriceCost";
+import { Product } from "../models";
+import { CreateProductDTO, EditPriceCost } from "../dtos";
 import { updateProductPriceAndCostInterceptor } from "../interceptors/updateProductPriceAndCost.interceptor";
-import { IProductService } from "src/service/interfaces/IProduct.service";
-import { Roles } from "src/utils/roles.enum";
-import { Role } from "src/decorators/role.decorator";
-import { AuthenticationGuard } from "src/guards/authentication.guard";
-import { AuthorizationGuard } from "src/guards/authorization.guard";
+import { IProductService } from "../service/interfaces";
+import { Roles } from "../utils/roles.enum";
+import { Role } from "../decorators/role.decorator";
+import { AuthenticationGuard, AuthorizationGuard } from "../guards";
 
 
 @Controller("product")

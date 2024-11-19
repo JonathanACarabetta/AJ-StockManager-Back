@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { ClientRepository } from "../repository/client.repository";
-import { Client } from "../models/client.entity";
-import { createClientDTO } from "../dtos/createClientDTO";
-import { IClientService } from "./interfaces/IClient.service";
+import { ClientRepository } from "../repository";
+import { Client } from "../models";
+import { createClientDTO } from "../dtos";
+import { IClientService } from "./interfaces";
 
 @Injectable()
 export class ClientService implements IClientService{
