@@ -1,7 +1,5 @@
-import { CreateProductDTO } from "../../dtos/createProductDTO";
-import { ProductsInSell } from "../../dtos/createSellDTO";
-import { EditPriceCost } from "../../dtos/editPriceCost";
-import { Product } from "../../models/product.entity";
+import { CreateProductDTO, ProductsInSell, EditPriceCost } from "../../dtos";
+import { Product } from "../../models";
 
 export interface IProductService{
     /**

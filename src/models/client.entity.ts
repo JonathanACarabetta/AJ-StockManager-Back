@@ -1,5 +1,5 @@
 import { Roles } from "../utils/roles.enum";
-import { Sell } from "./sell.entity";
+import { Sell } from "./index";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: "client"})

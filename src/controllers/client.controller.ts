@@ -1,11 +1,10 @@
 import { Controller, Get, Param, Post, Body, Put, Delete, Inject, UseGuards } from "@nestjs/common";
-import { Client } from "../models/client.entity";
-import { createClientDTO } from "../dtos/createClientDTO";
-import { IClientService } from "src/service/interfaces/IClient.service";
-import { Role } from "src/decorators/role.decorator";
-import { Roles } from "src/utils/roles.enum";
-import { AuthenticationGuard } from "src/guards/authentication.guard";
-import { AuthorizationGuard } from "src/guards/authorization.guard";
+import { Client } from "../models";
+import { createClientDTO } from "../dtos";
+import { IClientService } from "../service/interfaces";
+import { Role } from "../decorators/role.decorator";
+import { Roles } from "../utils/roles.enum";
+import { AuthenticationGuard, AuthorizationGuard } from "../guards";
 
 @Controller("clients")
 export class ClientController{

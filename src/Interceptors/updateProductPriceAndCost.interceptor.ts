@@ -1,6 +1,6 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
 import { Observable } from "rxjs";
-import { EditPriceCost } from "../dtos/editPriceCost";
+import { EditPriceCost } from "../dtos";
 
 @Injectable()
 export class updateProductPriceAndCostInterceptor implements NestInterceptor{

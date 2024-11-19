@@ -1,8 +1,6 @@
-import { Category } from "./category.entity";
-import { Sell_Details } from "./sell_details.entity";
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Provider } from "./provider.entity";
 
+import { Category, Sell_Details, Provider } from "./index";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 @Entity({
     name: "product"
 })

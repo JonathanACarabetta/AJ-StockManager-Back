@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { SellRepository } from "../repository/sell.repository";
-import { Sell } from "../models/sell.entity";
-import { createSellDTO } from "../dtos/createSellDTO";
-import { ISellService } from "./interfaces/ISell.service";
-import { MonthInfo } from "../dtos/monthInfo";
+import { SellRepository } from "../repository";
+import { Sell } from "../models";
+import { createSellDTO, MonthInfo } from "../dtos";
+import { ISellService } from "./interfaces";
 
 @Injectable()
 export class SellService implements ISellService{

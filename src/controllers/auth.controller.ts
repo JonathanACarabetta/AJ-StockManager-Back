@@ -1,13 +1,11 @@
 import { Body, Controller, Inject, Post, UseGuards } from "@nestjs/common";
-import { AuthInfoDTO } from "../dtos/AuthInfoDTO";
-import { createClientDTO } from "../dtos/createClientDTO";
-import { LoginDTO } from "../dtos/loginDTO";
-import { Client } from "../models/client.entity";
-import { IAuthService } from "src/service/interfaces/IAuth.service";
-import { Role } from "src/decorators/role.decorator";
-import { Roles } from "src/utils/roles.enum";
-import { AuthenticationGuard } from "src/guards/authentication.guard";
-import { AuthorizationGuard } from "src/guards/authorization.guard";
+import { AuthInfoDTO, createClientDTO, LoginDTO } from "../dtos";
+import { Client } from "../models";
+import { IAuthService } from "../service/interfaces";
+import { Role } from "../decorators/role.decorator";
+import { Roles } from "../utils/roles.enum";
+import { AuthenticationGuard } from "../guards";
+import { AuthorizationGuard } from "../guards";
 
 @Controller("auth")
 export class AuthController {

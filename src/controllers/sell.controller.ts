@@ -1,12 +1,10 @@
 import { Controller, Get, Param, Body, Post, Put, Delete, Inject, UseGuards, Query } from "@nestjs/common";
-import {Sell} from "../models/sell.entity";
-import { createSellDTO } from "../dtos/createSellDTO";
-import { ISellService } from "../service/interfaces/ISell.service";
-import { AuthenticationGuard } from "../guards/authentication.guard";
-import { AuthorizationGuard } from "../guards/authorization.guard";
+import {Sell} from "../models";
+import { createSellDTO, MonthInfo } from "../dtos";
+import { ISellService } from "../service/interfaces";
+import { AuthenticationGuard, AuthorizationGuard } from "../guards";
 import { Role } from "../decorators/role.decorator";
 import { Roles } from "../utils/roles.enum";
-import { MonthInfo } from "../dtos/monthInfo";
 
 @Controller("sell")
 export class SellController{

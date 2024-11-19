@@ -1,5 +1,4 @@
-import { Product } from "./product.entity";
-import { Sell } from "./sell.entity";
+import { Product, Sell } from "./index";
 import { Column, Entity, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "sell_details" })

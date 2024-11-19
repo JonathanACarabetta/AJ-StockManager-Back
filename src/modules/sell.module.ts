@@ -1,24 +1,10 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ProductService } from "../service/product.service";
-import { Product } from "../models/product.entity";
-import { CategoryService } from "../service/category.service";
-import { Category } from "../models/category.entity";
-import { Client } from "../models/client.entity"
-import { ClientService } from "../service/client.service";
-import { Sell_Details } from "../models/sell_details.entity";
-import { Sell_DetailsService } from "../service/sell_details.service";
-import { Sell } from "../models/sell.entity";
-import { SellService } from "../service/sell.service";
-import { SellController } from "../controllers/sell.controller";
-import { Provider } from "../models/provider.entity";
-import { ProviderService } from "../service/Provider.service";
-import { ProviderRepository } from "../repository/Provider.repository";
-import { SellRepository } from "src/repository/sell.repository";
-import { ProductRepository } from "src/repository/product.repository";
-import { Sell_DetailsRepository } from "src/repository/sell_details.repository";
-import { CategoryRepository } from "src/repository/category.repository";
-import { ClientRepository } from "src/repository/client.repository";
+import { Category, Client, Product, Provider, Sell, Sell_Details } from "../models";
+import { SellController } from "../controllers";
+import { CategoryService, ClientService, ProductService, ProviderService, Sell_DetailsService, SellService } from "../service";
+import { CategoryRepository, ClientRepository, ProductRepository, ProviderRepository, Sell_DetailsRepository, SellRepository } from "../repository";
+
 
 @Module({
     imports:[TypeOrmModule.forFeature([Sell,Product,Category,Client,Sell_Details, Provider])],

@@ -1,4 +1,4 @@
-import { Category } from "../../models/category.entity";
+import { Category } from "../../models";
 
 export interface ICategoryService{
     /**

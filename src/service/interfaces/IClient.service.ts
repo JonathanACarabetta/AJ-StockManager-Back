@@ -1,5 +1,5 @@
-import { createClientDTO } from "../../dtos/createClientDTO";
-import { Client } from "../../models/client.entity";
+import { createClientDTO } from "../../dtos";
+import { Client } from "../../models";
 
 export interface IClientService{
     /**

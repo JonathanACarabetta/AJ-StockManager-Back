@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { Provider } from "../models/provider.entity";
-import { ProviderRepository } from "../repository/Provider.repository";
-import { createProviderDTO } from "../dtos/createProviderDTO";
-import { IProviderService } from "./interfaces/IProvider.service";
+import { Provider } from "../models";
+import { ProviderRepository } from "../repository";
+import { createProviderDTO } from "../dtos";
+import { IProviderService } from "./interfaces";
 
 @Injectable()
 export class ProviderService implements IProviderService {

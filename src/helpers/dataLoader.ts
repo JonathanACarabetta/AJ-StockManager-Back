@@ -1,14 +1,8 @@
 import { Category } from "../models/category.entity";
 import { categories, providers, products, users } from "../utils/data"
 import { Inject, Injectable, OnModuleInit } from "@nestjs/common";
-import { ICategoryService } from "../service/interfaces/ICategory.service.js";
-import { IProductService } from "../service/interfaces/IProduct.service.js";
-import { IProviderService } from "../service/interfaces/IProvider.service.js";
-import { CreateProductDTO } from "../dtos/createProductDTO";
-import { createProviderDTO } from "../dtos/createProviderDTO";
-import { IClientService } from "src/service/interfaces/IClient.service";
-import { createClientDTO } from "src/dtos/createClientDTO";
-import { IAuthService } from "src/service/interfaces/IAuth.service";
+import { CreateProductDTO, createProviderDTO, createClientDTO } from "../dtos";
+import { IClientService, IAuthService, ICategoryService, IProductService, IProviderService  } from "../service/interfaces";
 
 @Injectable()
 export class dataLoader implements OnModuleInit {

@@ -1,5 +1,5 @@
-import { ProductsInSell } from "../../dtos/createSellDTO";
-import { Sell_Details } from "../../models/sell_details.entity";
+import { ProductsInSell } from "../../dtos";
+import { Sell_Details } from "../../models";
 
 export interface ISell_DetailsService{
     /**
